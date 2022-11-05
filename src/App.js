@@ -1,24 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import { Divider, Typography } from "@mui/material";
+import { useEffect, useState } from "react";
+
+import Main from "./components/Main";
+import Navigator from "./components/Navigator";
+
+import { BrowserRouter, Route, Routes, useLocation, useNavigate } from "react-router-dom";
 
 function App() {
+  
+  const [userLogged,setUserLogged] = useState(false);
+  
+
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route index path={"/*"} element=
+          {<Main 
+            userLogged={userLogged} setUserLogged={setUserLogged}
+            />
+          }/>
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 
