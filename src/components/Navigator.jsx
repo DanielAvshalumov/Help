@@ -35,7 +35,11 @@ function Navigator(props) {
                         }
                         {
                         <Button color="primary" variant="contained" sx={{ marginLeft:"88%" }} onClick={handleClick}>
-                            {}                                
+                            {
+                                props.userLogged ? "Log Out" : 
+                                location.pathname === "/login" ? "Sign In" : 
+                                "Log In" 
+                            }                                
                         </Button>}
                     </Toolbar>
                 </AppBar>

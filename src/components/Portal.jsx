@@ -1,18 +1,8 @@
-import { Box, createStyles, Grid, Paper, Typography } from "@mui/material";
+import { Box, createStyles, Divider, Grid, Paper, Typography } from "@mui/material";
 
 import react from "react"
 
 const Portal = (props) => {
-    // const styledPaper = styled()
-    // const classes = makeStyles((theme) => {
-    //     createStyles({
-    //         root: {
-    //             "&:hover": {
-    //                 backgroundColor:"gray"
-    //             }
-    //         }
-    //     })
-    // })
 
     return (
         <>
@@ -20,10 +10,13 @@ const Portal = (props) => {
                 <Grid item mb={4}>
                     <Typography align="center" variant="h3">Welcome to your page, {props.userData.name}</Typography>
                 </Grid>
+
                 <Box display="flex" justifyContent={"space-evenly"}>
                     <Grid item>
                         <Paper elevation={5} sx= {{"&:hover":{cursor:"pointer"}}}>
                             <Typography variant="h4">Mental Health</Typography>
+                            <Divider></Divider>
+                            
                         </Paper>
                     </Grid>
                     <Grid item ml={4}>
@@ -37,6 +30,7 @@ const Portal = (props) => {
                         </Paper>
                     </Grid>
                 </Box>
+
             </Grid>
         </>
     )

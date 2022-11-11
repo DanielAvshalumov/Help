@@ -38,7 +38,6 @@ public class UserServiceImpl implements UserService {
             UserEntity userEntity = userRepository.findByName(name);
             User user = new User();
             BeanUtils.copyProperties(userEntity, user);
-            System.out.println("User#"+user.getId()+" : " + user.getName()+" has logged on");
             return user;
         } catch (Exception e) {
             System.out.println(errorMessage("Username not found",e.getMessage()));
