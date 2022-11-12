@@ -11,5 +11,5 @@ import com.mental_journey.app.Model.UserLogin;
 public interface UserLoginRepository extends JpaRepository<UserLogin, Long> {
     Optional<UserLogin> findByUsername(String username);
 
-    Boolean existsbyUsername(String username);
+    Boolean existsByUsername(String username);
 }
