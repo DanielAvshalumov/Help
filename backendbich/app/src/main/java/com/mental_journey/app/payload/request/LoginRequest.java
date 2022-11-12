@@ -1,4 +1,4 @@
-package payload.request;
+package com.mental_journey.app.payload.request;
 
 import javax.validation.constraints.NotBlank;
 
