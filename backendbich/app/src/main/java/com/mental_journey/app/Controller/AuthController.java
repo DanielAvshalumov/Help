@@ -16,6 +16,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -52,7 +53,7 @@ public class AuthController {
     @Autowired
     JwtUtils jtwUtils;
 
-    @RequestMapping("/signin")
+    @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
         Authentication authentication = authenticationManager.authenticate(
@@ -74,7 +75,7 @@ public class AuthController {
                                                     roles));
     }
 
-    @RequestMapping("/signup") 
+    @PostMapping("/signup") 
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signupRequest) {
 
         if(loginRepository.existsByUsername(signupRequest.getUsername())) {

@@ -17,7 +17,7 @@ import com.mental_journey.app.services.UserService;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping("/api/")
+@RequestMapping("/meow/")
 public class UserController {
     
     @Autowired
