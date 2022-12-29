@@ -3,13 +3,14 @@ import { Box } from "@mui/system"
 import UserService from "../services/UserService";
 import react, { useState } from "react"
 import { redirect, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 function SignUp(props) {
     const nav = useNavigate();
     const [invalidForm,setInvalidForm] = useState("");
     const [signUpForm,setSignUpForm] = useState({
-        id: "",
-        name:"",
+        id:"",
+        username:"",
         password:""
     });
 
@@ -20,10 +21,10 @@ function SignUp(props) {
             [name]:value
         });
     }
-
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await UserService.saveUser(signUpForm)
+        await UserService.authSignUp(signUpForm)
             .then((response) => {
                 console.log(response);
                 nav("/login");
@@ -42,10 +43,10 @@ function SignUp(props) {
                     <Typography variant="h3" mb={4}>Sign Up</Typography>
 
                     <Box display={"flex"} flexDirection="column">
-                        <TextField name="name" value={signUpForm.name} placeholder="User Name" type="text" onChange={handleChange} autoComplete="off" sx={{ marginBottom:"20px" }}/>
+                        <TextField name="username" value={signUpForm.username} placeholder="User Name" type="text" onChange={handleChange} autoComplete="off" sx={{ marginBottom:"20px" }}/>
                         <TextField name="password" value={signUpForm.password} placeholder="Password" type="password" onChange={handleChange} sx={{ marginBottom:"20px" }}/>
                     </Box>
-                    { signUpForm.name !== "" && signUpForm.password !== "" ?
+                    { signUpForm.username !== "" && signUpForm.password !== "" ?
                     <Button variant="contained" color="primary" type="submit">Submit</Button> :
                     <Button disabled variant="contained" color="primary" type="submit">Submit</Button> }
                     <Typography variant="subtitle1">{invalidForm}</Typography>

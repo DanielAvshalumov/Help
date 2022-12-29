@@ -18,8 +18,9 @@ function Navigator(props) {
                 nav("/login");
             }
         } else {
-            nav("/login");
+            localStorage.removeItem('user');
             props.setUserLogged(false);
+            nav("/login");
         }
     }
 

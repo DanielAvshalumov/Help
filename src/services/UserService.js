@@ -1,22 +1,24 @@
 import axios from "axios";
 
-const USER_API_BASE_URL = "http://localhost:8080/api/users";
+const USER_API = "http://localhost:8080/api/auth/";
 
 class UserService {
-
-    getAllUsers() {
-        return axios.get(USER_API_BASE_URL);
+    
+    authSignUp(payload) {
+        return axios.post(USER_API + "signup", payload);
     }
 
-    getUserByUserName(username) {
-        return axios.get(USER_API_BASE_URL + "/" + username)
-            .catch(error => {
-                console.log("error:",error);
+    authSignIn(payload, staySigned) {
+        return axios.post(USER_API + "signin", payload)
+            .then((response) => {
+                if(response.data.accessToken && staySigned) {
+                    localStorage.setItem('user', JSON.stringify(response.data));
+                }
+                return response.data;
             })
-    }
-
-    saveUser(user) {
-        return axios.post(USER_API_BASE_URL, user);
+            .catch((error) => {
+                console.log(error);
+            })
     }
 
 }
