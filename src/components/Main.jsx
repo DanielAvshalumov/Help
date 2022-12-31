@@ -9,11 +9,14 @@ import Home from "./Home";
 import Navigator from "./Navigator"
 import { Divider, Typography } from "@mui/material";
 
+import styles from "../index.css";
+
 function Main(props) {
 
     const nav = useNavigate();
     const location = useLocation();
     const [incorrectMessage,setIncorrectMessage] = useState("");
+
 
     useEffect(()=>{
         if(props.userLogged === false) {
@@ -23,6 +26,8 @@ function Main(props) {
         }
     },[props.userLogged]);
 
+    
+    //TODO: implement loading state
     //Handles Login
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -30,34 +35,13 @@ function Main(props) {
         const name = e.target.name.value;
         const password = e.target.password.value;
         const {checked} = e.target.logCheck;
-        // const newRes = await UserService.getUserByUserName(value);
         const newRes = await UserService.authSignIn({username:name,password:password},checked);
         if(newRes) {
-            console.log(newRes);
-            props.setUserLogged(() => ({name:name}));
+            props.setUserLogged(() => ({name:name}))
         } else {
-            console.log('failed');
-            setIncorrectMessage("Username and/or Password is incorrect");
+            setIncorrectMessage("Username and/or password is incorrect");
         }
-        //Verifies UserName
-        // if(exists.data !== '') {
-        //     let expectedPassword = newRes.data.password;
-        //     const inputPassword = e.target.password.value;
-        //     // Verifies Password
-        //     if(inputPassword === expectedPassword) {
-        //         console.log("logged in");
-        //         props.setUserLogged(()=>({name:value}));
-        //         // Check if user wants to stay logged in
-        //         const { checked } = e.target.logCheck;
-        //         if(checked === true) {
-        //             //TODO: handle persistent login -- Cookies 
-        //         }
-        //     } else {
-        //         setIncorrectMessage("Incorrect Password");
-        //     }
-        // } else {
-        //     setIncorrectMessage("Username not found");
-        // }
+        
     }
     
 
@@ -68,7 +52,7 @@ function Main(props) {
                 userLogged={props.userLogged}
                 setUserLogged={props.setUserLogged}
             />
-            <Typography mt={3} variant="h2" textAlign="center">Help</Typography>
+            <Typography mt={3} variant="h2" textAlign="center" fontFamily={"NewYork"}>Help</Typography>
             <Divider textAlign="center" sx={{margin:"30px 200px"}} />
             <Routes>
                 <Route path="/login" element={<LogIn 

@@ -9,8 +9,14 @@ import { BrowserRouter, Route, Routes, useLocation, useNavigate } from "react-ro
 function App() {
   
   const [userLogged,setUserLogged] = useState(false);
-  
 
+  useEffect(() => {
+    let cookie = localStorage.getItem('user');
+    console.log(JSON.parse(cookie));
+    if(cookie) {
+      setUserLogged(() =>({name:JSON.parse(cookie).username}))
+    }
+  },[])
   
   return (
     <>

@@ -32,18 +32,6 @@ public class UserServiceImpl implements UserService {
             return user;
     }
 
-    @Override
-    public User getCredentials(String name) {
-        try {
-            UserEntity userEntity = userRepository.findByName(name);
-            User user = new User();
-            BeanUtils.copyProperties(userEntity, user);
-            return user;
-        } catch (Exception e) {
-            System.out.println(errorMessage("Username not found",e.getMessage()));
-            return null;  
-        }
-    }
 
     @Override
     public List<User> getAllUsers() {
@@ -54,8 +42,7 @@ public class UserServiceImpl implements UserService {
             .stream()
             .map(use -> new User(
                 use.getId(),
-                use.getName(),
-                use.getPassword()
+                use.getName()
             )).collect(Collectors.toList());
             
         return users;

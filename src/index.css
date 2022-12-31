@@ -1,0 +1,4 @@
+@font-face {
+    font-family: 'NewYork';
+    src:local('newyorkfont'), url(./fonts/newyorkfont.otf) format('opentype');
+}

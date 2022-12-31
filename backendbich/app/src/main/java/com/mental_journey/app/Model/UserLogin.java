@@ -5,6 +5,8 @@ import java.util.Set;
 
 import javax.persistence.*;
 
+import com.mental_journey.app.Entity.UserEntity;
+
 @Entity
 @Table( name = "user_details",
         uniqueConstraints = {
@@ -26,6 +28,10 @@ public class UserLogin {
                 inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private UserEntity user;
+    
     public UserLogin() {
     }
     
