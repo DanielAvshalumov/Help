@@ -32,6 +32,7 @@ public class Emotion {
 
     public Emotion(Integer rate) {
         this.rate = rate;
+        this.createdOn = new Date(System.currentTimeMillis());
     }
 
     public Integer getRate() {
