@@ -1,10 +1,8 @@
 package com.mental_journey.app.Model;
 
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.*;
-
-import org.springframework.data.annotation.CreatedDate;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -14,11 +12,13 @@ public class Emotion {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
-    @CreatedDate
+    @Column
+    @Temporal(TemporalType.DATE)
     private Date createdOn;
 
+    @Column
     private Integer rate;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -32,7 +32,7 @@ public class Emotion {
 
     public Emotion(Integer rate) {
         this.rate = rate;
-        this.createdOn = new Date(System.currentTimeMillis());
+        this.createdOn = new Date();
     }
 
     public Integer getRate() {
@@ -42,6 +42,10 @@ public class Emotion {
     public void setRate(Integer rate) {
         this.rate = rate;
     }
+
+    public Date getDate() {
+        return createdOn;
+    } 
 
     public void setUser(UserLogin user) {
         this.user = user;

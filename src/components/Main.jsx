@@ -14,7 +14,6 @@ import styles from "../index.css";
 function Main(props) {
 
     const nav = useNavigate();
-    const location = useLocation();
     const [incorrectMessage,setIncorrectMessage] = useState("");
 
 
@@ -27,7 +26,6 @@ function Main(props) {
     },[props.userLogged]);
 
     
-    //TODO: implement loading state
     //Handles Login
     const handleSubmit = async (e) => {
         e.preventDefault();

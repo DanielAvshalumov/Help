@@ -9,5 +9,5 @@ import com.mental_journey.app.Model.Emotion;
 
 @Repository
 public interface EmotionRepository extends JpaRepository<Emotion, Long> {
-    List<Emotion> findByUserId(Long id);
+    List<Emotion> findEmotionsByUserId(Long id);
 }

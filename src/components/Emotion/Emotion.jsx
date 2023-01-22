@@ -25,9 +25,8 @@ const Emotion = () => {
 
     const onSubmit = async (e) => {
         e.preventDefault();
-        console.log(mood);
         let id = JSON.parse(localStorage.getItem("user")).id
-        console.log(id);
+        let createdOn = new Date().toISOString().slice(0, 10).replace('T', ' ');
         return await EmotionService.createEmotion(id,mood);
     }
 
