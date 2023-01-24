@@ -8,6 +8,9 @@ class EmotionService {
         return axios.post(base+`${userId}`, emotion, {headers:{'Content-Type': 'application/json'}});
     }
 
+    getAllEmotions(pathId) {
+        return axios.get(base+`${pathId}`, {headers:{'Content-Type' : 'application/json'}});
+    }
 }
 
 export default new EmotionService();
