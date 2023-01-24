@@ -1,12 +1,15 @@
-import { Box, createStyles, Divider, Grid, Paper, Typography } from "@mui/material";
+import { Box, Divider, Grid, Paper, Typography } from "@mui/material";
 
-import react from "react"
-import { useState } from "react";
+import React from "react"
 import { useEffect } from "react";
-import { Route, Routes, useNavigate } from "react-router-dom";
-import Mental from "./Mental";
 
 const Portal = (props) => {
+    
+    const emotionPreview = props.data.map((item,key) => (<Typography key={key}>Date:{item.date+"\t"}Rate:{item.rate}</Typography>))
+    
+    useEffect(() => {
+        props.updateData();
+    },[]);
 
     return (
         <>
@@ -31,6 +34,7 @@ const Portal = (props) => {
                     <Grid item>
                         <Paper elevation={5} onClick={props.goTo.emotion} sx= {{"&:hover":{cursor:"pointer"}}}>
                             <Typography variant="h4">Emotional Health</Typography>
+                            {emotionPreview}
                         </Paper>
                     </Grid>
                 </Box>
