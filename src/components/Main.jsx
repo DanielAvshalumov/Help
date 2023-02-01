@@ -13,6 +13,9 @@ import styles from "../index.css";
 
 function Main(props) {
 
+    // !! Currently does not work if user doesn't stay signed in
+    //    Will get around to that sometime 
+
     const nav = useNavigate();
     const [incorrectMessage,setIncorrectMessage] = useState("");
 
@@ -29,7 +32,6 @@ function Main(props) {
     //Handles Login
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // Input: User Name
         const name = e.target.name.value;
         const password = e.target.password.value;
         const {checked} = e.target.logCheck;

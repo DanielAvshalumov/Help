@@ -4,11 +4,24 @@ import React from "react"
 import { useEffect } from "react";
 
 const Portal = (props) => {
+
+    const consolidateDates = () => {
+        let map = new Map()
+        props.data.map(item => {
+            if(!map.has(item.date)) {
+                map.set(item.date,[item.rate]);
+            } else {
+                map.get(item.date).push(item.rate);
+            }
+        })
+        console.log(map);
+    }
     
     const emotionPreview = props.data.map((item,key) => (<Typography key={key}>Date:{item.date+"\t"}Rate:{item.rate}</Typography>))
     
     useEffect(() => {
         props.updateData();
+        consolidateDates();
     },[]);
 
     return (
