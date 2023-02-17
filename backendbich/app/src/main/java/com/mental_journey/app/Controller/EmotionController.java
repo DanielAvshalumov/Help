@@ -50,9 +50,12 @@ public class EmotionController {
         if(!userRepository.existsById(userId)) {
             throw new Exception();
         }
-
-        List<Emotion> emotions = emotionRepository.findEmotionsByUserId(userId);
         
+        List<Emotion> emotions = emotionRepository.findEmotionsByUserId(userId);
+       
+        
+        // Map<Long, Emotion> map = emotions.stream()
+        //                         .collect(Collectors.toMap(Emotion::getId,Function.identity()));
         return new ResponseEntity<>(emotions, HttpStatus.OK);
     }
 

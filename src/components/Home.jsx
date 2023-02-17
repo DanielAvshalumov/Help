@@ -5,6 +5,7 @@ import Emotion from "./Emotion/Emotion";
 import Mental from "./Mental";
 import Portal from "./Portal";
 import EmotionService from "../services/EmotionService";
+import Physical from "./Physical/Physical";
 
 
 const Home = (props) => {
@@ -28,18 +29,21 @@ const Home = (props) => {
     const nav = useNavigate();
     const goToMental = () => {
         nav("mental");
-        console.log("cool");
     }
     const goToEmotion = () => {
         nav("emotion");
+    }
+    const goToPhysical = () => {
+        nav("physical");
     }
     
     return (
         <>
             <Routes>
-                <Route path="portal" element={<Portal userLogged={props.userLogged} goTo={{mental:goToMental,emotion:goToEmotion}} data={data} updateData={updateData}/>}></Route>
+                <Route path="portal" element={<Portal userLogged={props.userLogged} goTo={{mental:goToMental,emotion:goToEmotion,physical:goToPhysical}} data={data} updateData={updateData}/>}></Route>
                 <Route path="mental" element={<Mental/>}/>
                 <Route path="emotion" element={<Emotion data={data}/>}/>
+                <Route path="physical" element={<Physical />} />
             </Routes>
         </>
     );

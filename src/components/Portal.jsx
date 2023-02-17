@@ -14,14 +14,24 @@ const Portal = (props) => {
                 map.get(item.date).push(item.rate);
             }
         })
-        console.log(map);
+        let aux = [];
+        // Displays average emotion/mood scale per day 
+        for(let key of map.keys()) {
+            let avgRate = 0
+            let numOfEntries = 0;
+            map.get(key).forEach(ele => {
+                avgRate += ele;
+                numOfEntries++;
+            });
+            aux.push(key+": "+(avgRate/numOfEntries).toFixed(2));
+        }
+        return aux;
     }
-    
-    const emotionPreview = props.data.map((item,key) => (<Typography key={key}>Date:{item.date+"\t"}Rate:{item.rate}</Typography>))
+    const emotionPreview = consolidateDates().map((item,key) => (<Typography key={key} textAlign="center">{item}</Typography>))
     
     useEffect(() => {
         props.updateData();
-        consolidateDates();
+        console.log(props.data);
     },[]);
 
     return (
@@ -40,7 +50,7 @@ const Portal = (props) => {
                         </Paper>
                     </Grid>
                     <Grid item ml={4}>
-                        <Paper elevation={5} sx= {{"&:hover":{cursor:"pointer"}}}>
+                        <Paper elevation={5} onClick={props.goTo.physical} sx= {{"&:hover":{cursor:"pointer"}}}>
                             <Typography variant="h4">Physical Health</Typography>
                         </Paper>
                     </Grid>

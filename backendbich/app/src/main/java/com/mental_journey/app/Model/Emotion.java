@@ -35,6 +35,10 @@ public class Emotion {
         this.createdOn = new Date();
     }
 
+    public Long getId() {
+        return id;
+    }
+
     public Integer getRate() {
         return rate;
     }
