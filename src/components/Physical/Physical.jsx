@@ -1,5 +1,5 @@
 import { Divider, Grid, Typography, Box } from "@mui/material";
-import React, {  } from "react"
+import React, { useReducer } from "react"
 
 
 function reducer(physical, action) {

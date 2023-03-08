@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.mental_journey.app.Model.Emotion;
 import com.mental_journey.app.Repository.EmotionRepository;
 import com.mental_journey.app.Repository.UserLoginRepository;
+import com.mental_journey.app.Service.EmotionService;
 
 @CrossOrigin(origins="*", maxAge=3600)
 @RestController
@@ -31,17 +32,15 @@ public class EmotionController {
     @Autowired
     UserLoginRepository userRepository;
 
+    @Autowired
+    EmotionService emotionService;
+
     @PostMapping("/emotions/{userId}")
     public ResponseEntity<Emotion> createEmotion(
             @PathVariable(value = "userId") Long userId,
             @RequestBody Emotion emotionReq) throws Exception {
         
-        Emotion emotion = userRepository.findById(userId).map(user -> {
-            emotionReq.setUser(user);
-            return emotionRepository.save(emotionReq);
-        }).orElseThrow(() -> new Exception());
-        
-        return new ResponseEntity<>(emotion, HttpStatus.OK);
+        return emotionService.create(userId,emotionReq);
 
     }
 

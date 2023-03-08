@@ -28,10 +28,10 @@ import com.mental_journey.app.Repository.RoleRepository;
 import com.mental_journey.app.Repository.UserLoginRepository;
 import com.mental_journey.app.Security.Jwt.JwtUtils;
 import com.mental_journey.app.Security.Services.UserDetailsImpl;
-import com.mental_journey.app.payload.request.LoginRequest;
-import com.mental_journey.app.payload.request.SignupRequest;
-import com.mental_journey.app.payload.response.JwtResponse;
-import com.mental_journey.app.payload.response.MessageResponse;
+import com.mental_journey.app.Security.payload.request.LoginRequest;
+import com.mental_journey.app.Security.payload.request.SignupRequest;
+import com.mental_journey.app.Security.payload.response.JwtResponse;
+import com.mental_journey.app.Security.payload.response.MessageResponse;
 
 @CrossOrigin(origins="*", maxAge=3600)
 @RestController
