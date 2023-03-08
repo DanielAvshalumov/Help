@@ -1,5 +1,8 @@
 package com.mental_journey.app.Service;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.http.HttpStatus;
@@ -26,6 +29,22 @@ public class EmotionServiceImpl implements EmotionService {
             return emotionRepo.save(req);
         }).orElseThrow(() -> new NotFoundException());
         return new ResponseEntity<>(emotion,HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<List<Emotion>> getAll(Long id) throws NotFoundException {
+        if(!userRepo.existsById(id)) {
+            throw new NotFoundException();
+        }
+        List<Emotion> emotions = emotionRepo.findEmotionsByUserId(id);
+        return new ResponseEntity<>(emotions,HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<Object> get(Long id) throws NotFoundException {
+        Optional<Emotion> emotion = emotionRepo.findById(id);
+        return new ResponseEntity<>(emotion, HttpStatus.OK);
+
     }
     
 }
