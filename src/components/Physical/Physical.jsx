@@ -1,6 +1,7 @@
 import { Divider, Grid, Typography, Box } from "@mui/material";
 import React, { useReducer, useState, useEffect } from "react"
 import axios from "axios";
+import PhysicalService from "../../services/PhysicalService";
 
 
 function reducer(physical, action) {
@@ -46,8 +47,17 @@ const Physical = () => {
             payload: res.data
         });
     }
+
+    const checkFunction = async () => {
+        const id = JSON.parse(localStorage.getItem("user")).id;
+        const res = await PhysicalService.getPhysical(id);
+        console.log(res);
+    }
+    
+
     useEffect(() => {
         getInitialPhysical();
+        checkFunction();
     },[]);
 
     return (

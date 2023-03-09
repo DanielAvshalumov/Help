@@ -32,4 +32,14 @@ public class PhysicalServiceImpl implements PhysicalService{
         Physical physical = physicalRepo.save(req);
         return new ResponseEntity<>(physical,HttpStatus.OK);
     }
+
+    @Override
+    public ResponseEntity<Physical> get(Long id) throws NotFoundException {
+        Optional<UserLogin> user = userRepo.findById(id);
+        if(user == null) {
+            throw new NotFoundException();
+        }
+        Physical res = physicalRepo.findPhysicalByUser(user);
+        return new ResponseEntity<Physical>(res, HttpStatus.OK);
+    }
 }
