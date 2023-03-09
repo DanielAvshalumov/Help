@@ -1,5 +1,7 @@
 package com.mental_journey.app.Model;
 
+import java.util.Optional;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -24,5 +26,9 @@ public class Physical {
     @OneToOne(cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
     private UserLogin user;
+
+    public void setUser(Optional<UserLogin> user) {
+        this.user = user.get();
+    }
 
 }
