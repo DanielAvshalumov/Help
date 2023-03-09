@@ -1,13 +1,19 @@
 import { Divider, Grid, Typography, Box } from "@mui/material";
-import React, { useReducer } from "react"
+import React, { useReducer, useState, useEffect } from "react"
+import axios from "axios";
 
 
 function reducer(physical, action) {
     switch (action.type) {
-        case(""): {
+        case("on-load"): {
+            return {
+                
+            }
+        }
+        case("update-calories"): {
 
         }
-        case(9): {
+        case("add-meal"): {
             
         }
     }
@@ -15,7 +21,7 @@ function reducer(physical, action) {
 
 const Physical = () => {
 
-    const state = {
+    const physicalState = {
         calories : 0,
         protein: 0,
         carbs: 0,
@@ -30,7 +36,19 @@ const Physical = () => {
             }  
         ]
     }
-    const [physical, dispatch] = useReducer(reducer, state);
+    const [loading, setLoading] = useState(false);
+    const [physical, dispatch] = useReducer(reducer, physicalState);
+    const getInitialPhysical = async () => {
+        const id = JSON.parse(localStorage.getItem("user")).id
+        const res = await axios.get(`http://localhost:8080/api/physical/${id}`,{headers:{'Content-Type':'application/json'}});
+        dispatch({
+            type: "on-load",
+            payload: res.data
+        });
+    }
+    useEffect(() => {
+        getInitialPhysical();
+    },[]);
 
     return (
         <React.Fragment>

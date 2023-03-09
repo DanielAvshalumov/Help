@@ -6,6 +6,7 @@ import { useEffect } from "react";
 const Portal = (props) => {
 
     const consolidateDates = () => {
+        // Adds emotion data to a hashmap to consolidate
         let map = new Map()
         props.data.map(item => {
             if(!map.has(item.date)) {
@@ -27,6 +28,7 @@ const Portal = (props) => {
         }
         return aux;
     }
+    // Emotion preview element
     const emotionPreview = consolidateDates().map((item,key) => (<Typography key={key} textAlign="center">{item}</Typography>))
     
     useEffect(() => {
