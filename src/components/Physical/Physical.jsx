@@ -8,8 +8,8 @@ function reducer(physical, action) {
     switch (action.type) {
         case("on-load"): {
             return {
-                
-            }
+                calories: action.payload
+            };
         }
         case("update-calories"): {
 

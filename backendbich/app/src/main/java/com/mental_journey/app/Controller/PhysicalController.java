@@ -25,7 +25,6 @@ public class PhysicalController {
 
     @PostMapping("{id}")
     public ResponseEntity<Physical> createPhysical(@PathVariable Long id, @RequestBody Physical req) throws NotFoundException {
-        
         return physicalService.create(id,req);
     }
 
