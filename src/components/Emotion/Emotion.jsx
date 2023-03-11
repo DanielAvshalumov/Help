@@ -16,31 +16,27 @@ const MyRadio = (props) => {
     )
 }
 
-console.log("fym");
+
 
 const Emotion = (props) => {
+
+console.log("test");
+
+const Emotion = ({ data, updateData }) => {
+
     const [mood,setMood] = useState(0);
     
     const [checked,setChecked] = useState(false);
     const [comment, setComment] = useState("");
     //test
-    const [datas, setDatas] = useState(
-        Array.from({ length: 50 }, () => Math.round(Math.random() * 100))
-      );
+    const [graphData, setGraphData] = useState(data.map(item => (item.rate)));
 
-    useEffect(() => {
-        console.log("effect");
-        const dataArr = props.data.map(item => (item.rate));
-        console.log(dataArr);
-        
-    },[props.data]);
-
-    
     const onSubmit = async (e) => {
         e.preventDefault();
         let id = JSON.parse(localStorage.getItem("user")).id;
-        console.log(e.target);
-        return await EmotionService.createEmotion(id,mood);
+        const res = await EmotionService.createEmotion(id,mood);
+        setGraphData((prev) => [...prev,res.data.rate]);
+        console.log(res);
     }
     const handleClick = (e) => {
         setMood(e.target.value);
@@ -70,7 +66,7 @@ const Emotion = (props) => {
                     </Paper>
                 </Grid>
                 <Grid ml={14} mt={10} item>
-                    <ZoomableLineChart data={datas} />
+                    <ZoomableLineChart data={graphData} />
                 </Grid>
                 <Grid item m={9}>
                 {checked && 
