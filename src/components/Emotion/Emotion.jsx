@@ -17,9 +17,6 @@ const MyRadio = (props) => {
 }
 
 
-
-const Emotion = (props) => {
-
 console.log("test");
 
 const Emotion = ({ data, updateData }) => {
