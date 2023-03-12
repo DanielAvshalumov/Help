@@ -7,8 +7,9 @@ import PhysicalService from "../../services/PhysicalService";
 function reducer(physical, action) {
     switch (action.type) {
         case("on-load"): {
+            let info = action.payload;
             return {
-                calories: action.payload
+                info
             };
         }
         case("update-calories"): {
@@ -17,6 +18,7 @@ function reducer(physical, action) {
         case("add-meal"): {
             
         }
+        default:return physical;
     }
 }
 
@@ -39,29 +41,34 @@ const Physical = () => {
     }
     const [loading, setLoading] = useState(false);
     const [physical, dispatch] = useReducer(reducer, physicalState);
+    const [firstUse, setFirstUse] = useState(false);
+    
     const getInitialPhysical = async () => {
         const id = JSON.parse(localStorage.getItem("user")).id
-        const res = await axios.get(`http://localhost:8080/api/physical/${id}`,{headers:{'Content-Type':'application/json'}});
-        dispatch({
-            type: "on-load",
-            payload: res.data
-        });
+        const response = await PhysicalService.getPhysical(id)
+                .then((res) => {
+                    console.log(res.data);
+                    if(!res.data) {
+                        setFirstUse(true);
+                    } else {
+                        dispatch({type:"on-load",payload:res.data})
+                    }
+                }).catch((error) => {
+                    console.log("didn't work",error);
+                });
     }
 
-    const checkFunction = async () => {
-        const id = JSON.parse(localStorage.getItem("user")).id;
-        const res = await PhysicalService.getPhysical(id);
-        console.log(res);
-    }
     
 
     useEffect(() => {
         getInitialPhysical();
-        checkFunction();
+        console.log(physical);
     },[]);
 
     return (
         <React.Fragment>
+
+            { firstUse ? <PhysicalConfigPage/> :
             
             <Grid container>
                 <Grid item md={5}>
@@ -83,8 +90,21 @@ const Physical = () => {
                     <Typography variant="h3" textAlign="center">Meals</Typography>
                 </Grid>
             </Grid>
+
+            }
             
         </React.Fragment>
+    )
+}
+
+const PhysicalConfigPage = () => {
+
+
+
+    return (
+        <>
+            <Typography variant="h1">Hey</Typography>
+        </>
     )
 }
 

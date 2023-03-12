@@ -1,5 +1,6 @@
 package com.mental_journey.app.Service;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,21 +26,27 @@ public class PhysicalServiceImpl implements PhysicalService{
     @Override
     public ResponseEntity<Physical> create(Long id, Physical req) throws NotFoundException {
         Optional<UserLogin> user = userRepo.findById(id);
-        if(user == null) {
+        if(user.get() == null) {
             throw new NotFoundException();
         }
         req.setId(id);
+        req.setUser(user.get());
         Physical physical = physicalRepo.save(req);
         return new ResponseEntity<>(physical,HttpStatus.OK);
     }
 
     @Override
-    public ResponseEntity<Physical> get(Long id) throws NotFoundException {
+    public ResponseEntity<Physical> get(Long id) throws NotFoundException, NoSuchElementException {
         Optional<UserLogin> user = userRepo.findById(id);
-        if(user == null) {
+        if(user.get() == null) {
             throw new NotFoundException();
         }
-        Physical res = physicalRepo.findPhysicalByUser(user);
-        return new ResponseEntity<Physical>(res, HttpStatus.OK);
+        Optional<Physical> res = physicalRepo.findById(id);
+        try {
+            return new ResponseEntity<Physical>(res.get(), HttpStatus.OK);
+        } catch (NoSuchElementException ex) {
+            System.out.println(ex.getMessage());
+            return new ResponseEntity<>(null,HttpStatus.OK);
+        }
     }
 }

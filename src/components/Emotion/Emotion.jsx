@@ -25,7 +25,7 @@ const Emotion = ({ data, updateData }) => {
     
     const [checked,setChecked] = useState(false);
     const [comment, setComment] = useState("");
-    //test
+
     const [graphData, setGraphData] = useState(data.map(item => (item.rate)));
 
     const onSubmit = async (e) => {
