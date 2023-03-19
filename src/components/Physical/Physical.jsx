@@ -1,24 +1,26 @@
-import { Divider, Grid, Typography, Box } from "@mui/material";
+import { Divider, Grid, Typography, Box, TextField, Fade, Button } from "@mui/material";
 import React, { useReducer, useState, useEffect } from "react"
-import axios from "axios";
 import PhysicalService from "../../services/PhysicalService";
 
 
 function reducer(physical, action) {
     switch (action.type) {
-        case("on-load"): {
-            let info = action.payload;
-            return {
-                info
-            };
-        }
-        case("update-calories"): {
+        case("on-load"): 
+           return {
+            ...physical,
+            calories: action.payload.calories,
+            protein: action.payload.protein,
+            carbs: action.payload.carbs,
+            fat: action.payload.fat
+           }
+        case("update-calories"): 
 
-        }
-        case("add-meal"): {
+        
+        case("add-meal"): 
             
-        }
-        default:return physical;
+        
+        default:
+            return physical;
     }
 }
 
@@ -40,8 +42,8 @@ const Physical = () => {
         ]
     }
     const [loading, setLoading] = useState(false);
+    const [firstUse, setFirstUse] = useState(true);
     const [physical, dispatch] = useReducer(reducer, physicalState);
-    const [firstUse, setFirstUse] = useState(false);
     
     const getInitialPhysical = async () => {
         const id = JSON.parse(localStorage.getItem("user")).id
@@ -49,7 +51,7 @@ const Physical = () => {
                 .then((res) => {
                     console.log(res.data);
                     if(!res.data) {
-                        setFirstUse(true);
+                        setFirstUse(false);
                     } else {
                         dispatch({type:"on-load",payload:res.data})
                     }
@@ -58,27 +60,26 @@ const Physical = () => {
                 });
     }
 
-    
-
     useEffect(() => {
         getInitialPhysical();
         console.log(physical);
+        console.log(firstUse);
     },[]);
 
     return (
         <React.Fragment>
 
-            { firstUse ? <PhysicalConfigPage/> :
+            { !firstUse ? <Fade in={!firstUse} timeout={4000}><div>{PhysicalConfigPage}</div></Fade> :
             
             <Grid container>
                 <Grid item md={5}>
                     <Typography variant="h3" textAlign="center">Macros</Typography>
                     <Box display={"flex"} mt={3}>
                         <Box ml={15}>
-                            Current
+                            Current:
                         </Box>
                         <Box ml={15}>
-                            Goal
+                            Goal:  {physical.calories}
                         </Box>
                         <Box ml={15}>
                             Left
@@ -97,15 +98,22 @@ const Physical = () => {
     )
 }
 
-const PhysicalConfigPage = () => {
+const onSubmit = () => {
 
-
-
-    return (
-        <>
-            <Typography variant="h1">Hey</Typography>
-        </>
-    )
 }
+
+const PhysicalConfigPage =  (
+    <>
+        <Typography variant="h3" textAlign={"center"}>Enter your Macros here</Typography>
+        <Box sx={{ display:'flex', flexDirection:'column', alignItems:"center"}}>
+            <TextField placeholder="Calories" sx={{ marginTop:3 }}/>
+            <TextField type={"number"} placeholder="Protein" sx={{ marginTop:3 }}/>
+            <TextField type={"number"} placeholder="Carbs" sx={{ marginTop:3 }} />
+            <TextField type={"number"} placeholder="Fat" sx={{ marginTop:3 }} />
+            <Button variant="contained" type="submit" sx={{ marginTop:3 }}>Submit</Button>
+        </Box>
+    </>
+);
+
 
 export default Physical;

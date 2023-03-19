@@ -4,7 +4,8 @@ const base = "http://localhost:8080/api/physical/"
 
 class PhysicalService {
 
-    createPhysical(id) {
+    createPhysical(id, body) {
+        return axios.post(base+`${id}`, body, {headers:{'Content-Type':'application/json'}});
     }
 
     getPhysical(id) {

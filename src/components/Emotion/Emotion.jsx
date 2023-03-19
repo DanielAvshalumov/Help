@@ -17,8 +17,6 @@ const MyRadio = (props) => {
 }
 
 
-console.log("test");
-
 const Emotion = ({ data, updateData }) => {
 
     const [mood,setMood] = useState(0);
