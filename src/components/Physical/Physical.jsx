@@ -1,6 +1,7 @@
 import { Divider, Grid, Typography, Box, TextField, Fade, Button } from "@mui/material";
-import React, { useReducer, useState, useEffect } from "react"
+import React, { useReducer, useState, useEffect, useRef } from "react"
 import PhysicalService from "../../services/PhysicalService";
+import { useNavigate } from "react-router-dom";
 
 
 function reducer(physical, action) {
@@ -44,6 +45,21 @@ const Physical = () => {
     const [loading, setLoading] = useState(false);
     const [firstUse, setFirstUse] = useState(true);
     const [physical, dispatch] = useReducer(reducer, physicalState);
+    const calorieRef = useRef();
+    const nav = useNavigate();
+
+    const handleSubmit = async (e) => {
+        const input = [...calorieRef.current].filter(item => item.value).map(item => item.value);
+        const body = {
+            calories : input[0],
+            protein: input[1],
+            carbs: input[2],
+            fat: input[3]
+        }
+        let id = JSON.parse(localStorage.getItem("user")).id;
+        const res = await PhysicalService.createPhysical(id,body);
+        console.log(res);
+    }
     
     const getInitialPhysical = async () => {
         const id = JSON.parse(localStorage.getItem("user")).id
@@ -66,10 +82,23 @@ const Physical = () => {
         console.log(firstUse);
     },[]);
 
+    const PhysicalConfigPage =  (
+        <>
+            <Typography variant="h3" textAlign={"center"}>Enter your Macros here</Typography>
+            <Box sx={{ display:'flex', flexDirection:'column', alignItems:"center"}}>
+                <TextField placeholder="Calories" sx={{ marginTop:3 }} inputRef={calorieRef} />
+                <TextField type={"number"} placeholder="Protein" sx={{ marginTop:3 }}/>
+                <TextField type={"number"} placeholder="Carbs" sx={{ marginTop:3 }} />
+                <TextField type={"number"} placeholder="Fat" sx={{ marginTop:3 }} />
+                <Button variant="contained" type="submit" sx={{ marginTop:3 }}>Submit</Button>
+            </Box>
+        </>
+    );
+
     return (
         <React.Fragment>
 
-            { !firstUse ? <Fade in={!firstUse} timeout={4000}><div>{PhysicalConfigPage}</div></Fade> :
+            { !firstUse ? <Fade in={!firstUse} timeout={4000}><form onSubmit={handleSubmit} ref={calorieRef}>{PhysicalConfigPage}</form></Fade> :
             
             <Grid container>
                 <Grid item md={5}>
@@ -98,22 +127,9 @@ const Physical = () => {
     )
 }
 
-const onSubmit = () => {
 
-}
 
-const PhysicalConfigPage =  (
-    <>
-        <Typography variant="h3" textAlign={"center"}>Enter your Macros here</Typography>
-        <Box sx={{ display:'flex', flexDirection:'column', alignItems:"center"}}>
-            <TextField placeholder="Calories" sx={{ marginTop:3 }}/>
-            <TextField type={"number"} placeholder="Protein" sx={{ marginTop:3 }}/>
-            <TextField type={"number"} placeholder="Carbs" sx={{ marginTop:3 }} />
-            <TextField type={"number"} placeholder="Fat" sx={{ marginTop:3 }} />
-            <Button variant="contained" type="submit" sx={{ marginTop:3 }}>Submit</Button>
-        </Box>
-    </>
-);
+
 
 
 export default Physical;
