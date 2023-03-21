@@ -1,8 +1,6 @@
 import { Divider, Grid, Typography, Box, TextField, Fade, Button } from "@mui/material";
 import React, { useReducer, useState, useEffect, useRef } from "react"
 import PhysicalService from "../../services/PhysicalService";
-import { useNavigate } from "react-router-dom";
-
 
 function reducer(physical, action) {
     switch (action.type) {
@@ -46,7 +44,6 @@ const Physical = () => {
     const [firstUse, setFirstUse] = useState(true);
     const [physical, dispatch] = useReducer(reducer, physicalState);
     const calorieRef = useRef();
-    const nav = useNavigate();
 
     const handleSubmit = async (e) => {
         const input = [...calorieRef.current].filter(item => item.value).map(item => item.value);
@@ -86,7 +83,7 @@ const Physical = () => {
         <>
             <Typography variant="h3" textAlign={"center"}>Enter your Macros here</Typography>
             <Box sx={{ display:'flex', flexDirection:'column', alignItems:"center"}}>
-                <TextField placeholder="Calories" sx={{ marginTop:3 }} inputRef={calorieRef} />
+                <TextField type={"number"} placeholder="Calories" sx={{ marginTop:3 }} inputRef={calorieRef} />
                 <TextField type={"number"} placeholder="Protein" sx={{ marginTop:3 }}/>
                 <TextField type={"number"} placeholder="Carbs" sx={{ marginTop:3 }} />
                 <TextField type={"number"} placeholder="Fat" sx={{ marginTop:3 }} />
@@ -104,14 +101,23 @@ const Physical = () => {
                 <Grid item md={5}>
                     <Typography variant="h3" textAlign="center">Macros</Typography>
                     <Box display={"flex"} mt={3}>
-                        <Box ml={15}>
-                            Current:
+                        <Box display="flex" flexDirection={"column"} ml={12}>
+                            <Typography variant="h4">Current</Typography>
+                            <Typography variant="h5" mt={4}>Calories</Typography>
+                            <Typography variant="h5" mt={4}>Protein</Typography>
+                            <Typography variant="h5" mt={4}>Carbs</Typography>
+                            <Typography variant="h5" mt={4}>Fat</Typography>
                         </Box>
-                        <Box ml={15}>
-                            Goal:  {physical.calories}
+                        <Box display="flex" flexDirection={"column"} ml={12}>
+                            <Typography variant="h4">Goal</Typography>
+                            <Typography variant="h5" mt={4}>{physical.calories}</Typography>
+                            <Typography variant="h5" mt={4}>{physical.protein}</Typography>
+                            <Typography variant="h5" mt={4}>{physical.carbs}</Typography>
+                            <Typography variant="h5" mt={4}>{physical.fat}</Typography>
                         </Box>
-                        <Box ml={15}>
-                            Left
+                        <Box display="flex" flexDirection={"column"} ml={12}>
+                            <Typography variant="h4">Left</Typography>
+                            <Typography variant="h5" mt={3}></Typography>
                         </Box>
                     </Box>
                 </Grid>

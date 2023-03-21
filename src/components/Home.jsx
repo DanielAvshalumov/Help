@@ -21,6 +21,8 @@ const Home = (props) => {
             }
         });
 
+        //TODO: change data state to include physical 
+
         return () => {
             mounted = false;
         }

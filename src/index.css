@@ -2,3 +2,8 @@
     font-family: 'NewYork';
     src:local('newyorkfont'), url(./fonts/newyorkfont.otf) format('opentype');
 }
+
+body {
+    background-image: url("./pexels-alexander-kovalev-2847648.jpg");
+    background-size: cover;
+}
