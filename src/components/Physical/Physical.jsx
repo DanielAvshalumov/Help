@@ -7,10 +7,13 @@ function reducer(physical, action) {
         case("on-load"): 
            return {
             ...physical,
-            calories: action.payload.calories,
-            protein: action.payload.protein,
-            carbs: action.payload.carbs,
-            fat: action.payload.fat
+            goal: 
+            {
+                calories:action.payload.calories,
+                protein: action.payload.protein,
+                carbs: action.payload.carbs,
+                fat: action.payload.fat
+            }
            }
         case("update-calories"): 
 
@@ -26,10 +29,18 @@ function reducer(physical, action) {
 const Physical = () => {
 
     const physicalState = {
-        calories : 0,
-        protein: 0,
-        carbs: 0,
-        fat: 0,
+        goal:{
+            calories : 0,
+            protein: 0,
+            carbs: 0,
+            fat: 0,
+        },
+        current: {
+            calories : 0,
+            protein: 0,
+            carbs: 0,
+            fat: 0,
+        },
         meals: [
             {
                 mealName: "",
@@ -110,20 +121,24 @@ const Physical = () => {
                         </Box>
                         <Box display="flex" flexDirection={"column"} ml={12}>
                             <Typography variant="h4">Goal</Typography>
-                            <Typography variant="h5" mt={4}>{physical.calories}</Typography>
-                            <Typography variant="h5" mt={4}>{physical.protein}</Typography>
-                            <Typography variant="h5" mt={4}>{physical.carbs}</Typography>
-                            <Typography variant="h5" mt={4}>{physical.fat}</Typography>
+                            <Typography variant="h5" mt={4}>{physical.goal.calories}</Typography>
+                            <Typography variant="h5" mt={4}>{physical.goal.protein}</Typography>
+                            <Typography variant="h5" mt={4}>{physical.goal.carbs}</Typography>
+                            <Typography variant="h5" mt={4}>{physical.goal.fat}</Typography>
                         </Box>
                         <Box display="flex" flexDirection={"column"} ml={12}>
                             <Typography variant="h4">Left</Typography>
-                            <Typography variant="h5" mt={3}></Typography>
+                            <Typography variant="h5" mt={4}>{physical.current.calories}</Typography>
+                            <Typography variant="h5" mt={4}>{physical.current.protein}</Typography>
+                            <Typography variant="h5" mt={4}>{physical.current.carbs}</Typography>
+                            <Typography variant="h5" mt={4}>{physical.current.fat}</Typography>
                         </Box>
                     </Box>
                 </Grid>
                 <Divider orientation="vertical" flexItem />
-                <Grid item md={6}>
+                <Grid item textAlign={"center"} md={8} lg={6}>
                     <Typography variant="h3" textAlign="center">Meals</Typography>
+                    <Button variant="contained" sx={{ mt:3 }}>Add a meal</Button>
                 </Grid>
             </Grid>
 
