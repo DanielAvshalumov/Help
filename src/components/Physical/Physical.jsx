@@ -1,6 +1,8 @@
 import { Divider, Grid, Typography, Box, TextField, Fade, Button } from "@mui/material";
 import React, { useReducer, useState, useEffect, useRef } from "react"
+import { Link, Route, Routes } from "react-router-dom";
 import PhysicalService from "../../services/PhysicalService";
+import AddMeal from "./AddMeal";
 
 function reducer(physical, action) {
     switch (action.type) {
@@ -51,7 +53,6 @@ const Physical = () => {
             }  
         ]
     }
-    const [loading, setLoading] = useState(false);
     const [firstUse, setFirstUse] = useState(true);
     const [physical, dispatch] = useReducer(reducer, physicalState);
     const calorieRef = useRef();
@@ -74,9 +75,8 @@ const Physical = () => {
         const response = await PhysicalService.getPhysical(id)
                 .then((res) => {
                     console.log(res.data);
-                    if(!res.data) {
+                    if(res.data) {
                         setFirstUse(false);
-                    } else {
                         dispatch({type:"on-load",payload:res.data})
                     }
                 }).catch((error) => {
@@ -106,7 +106,7 @@ const Physical = () => {
     return (
         <React.Fragment>
 
-            { !firstUse ? <Fade in={!firstUse} timeout={4000}><form onSubmit={handleSubmit} ref={calorieRef}>{PhysicalConfigPage}</form></Fade> :
+            { firstUse ? <Fade in={firstUse} timeout={4000}><form onSubmit={handleSubmit} ref={calorieRef}>{PhysicalConfigPage}</form></Fade> :
             
             <Grid container>
                 <Grid item md={5}>
@@ -138,12 +138,16 @@ const Physical = () => {
                 <Divider orientation="vertical" flexItem />
                 <Grid item textAlign={"center"} md={8} lg={6}>
                     <Typography variant="h3" textAlign="center">Meals</Typography>
-                    <Button variant="contained" sx={{ mt:3 }}>Add a meal</Button>
+                    <Link to="/home/physical/addmeal">
+                        <Button variant="contained" sx={{ mt:3 }}>Add a meal</Button>
+                    </Link>
                 </Grid>
             </Grid>
-
             }
-            
+            {/* create two paths, one for meal selection and one for meal additions */}
+            <Routes path="/">
+                <Route path="addmeal" element={<AddMeal/>} />
+            </Routes>
         </React.Fragment>
     )
 }

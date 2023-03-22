@@ -47,19 +47,19 @@ const Portal = (props) => {
 
                 <Box display="flex" justifyContent={"space-evenly"}>
                     <Grid item>
-                        <Paper elevation={7} onClick={props.goTo.mental} sx= {{"&:hover":{cursor:"pointer"}, "padding":1, "backgroundColor":"transparent", "opacity":0.8}}>
+                        <Paper elevation={17} onClick={props.goTo.mental} sx= {{"&:hover":{cursor:"pointer"}, "padding":1, "backgroundColor":"transparent", "opacity":0.8, "borderRadius":3}}>
                             <Typography variant="h4">Mental Health</Typography>
                             <Divider></Divider>
                         </Paper>
                     </Grid>
                     <Grid item ml={4}>
-                        <Paper elevation={7} onClick={props.goTo.physical} sx= {{"&:hover":{cursor:"pointer"},"padding":1,"backgroundColor":"transparent", "opacity":0.8}}>
+                        <Paper elevation={17} onClick={props.goTo.physical} sx= {{"&:hover":{cursor:"pointer"},"padding":1,"backgroundColor":"transparent", "opacity":0.8, "borderRadius":3}}>
                             <Typography variant="h4">Physical Health</Typography>
                             <Divider></Divider>
                         </Paper>
                     </Grid>
                     <Grid item>
-                        <Paper elevation={17} onClick={props.goTo.emotion} sx= {{"&:hover":{cursor:"pointer"}, "padding":1, "backgroundColor":"transparent", "opacity":0.8}}>
+                        <Paper elevation={17} onClick={props.goTo.emotion} sx= {{"&:hover":{cursor:"pointer"}, "padding":1, "backgroundColor":"transparent", "opacity":0.8, "borderRadius":3}}>
                             <Typography variant="h4">Emotional Health</Typography>
                             <Divider/>
                             {emotionPreview}

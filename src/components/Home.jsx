@@ -45,7 +45,7 @@ const Home = (props) => {
                 <Route path="portal" element={<Portal userLogged={props.userLogged} goTo={{mental:goToMental,emotion:goToEmotion,physical:goToPhysical}} data={data} updateData={updateData}/>}></Route>
                 <Route path="mental" element={<Mental/>}/>
                 <Route path="emotion" element={<Emotion data={data} updateData={updateData}/>}/>
-                <Route path="physical" element={<Physical />} />
+                <Route path="physical/*" element={<Physical />} />
             </Routes>
         </>
     );
