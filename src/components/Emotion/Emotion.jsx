@@ -54,8 +54,7 @@ const Emotion = ({ data, updateData }) => {
                                     <FormControlLabel value={2} control={<MyRadio />} label="🙁 Bad" />
                                     <FormControlLabel value={1} control={<MyRadio />} label="😫 Can't get worse" />
                                 </RadioGroup>
-                                <Button type="submit" >Submit</Button>
-                                
+                                <Button type="submit" >Submit</Button> 
                             </FormControl>
                         </form>
                     </Paper>

@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mental_journey.app.Model.Meal;
 import com.mental_journey.app.Model.Physical;
+import com.mental_journey.app.Service.MealService;
 import com.mental_journey.app.Service.PhysicalService;
 
 @CrossOrigin(origins="*", maxAge=3600)
@@ -23,6 +25,9 @@ public class PhysicalController {
     @Autowired
     PhysicalService physicalService;
 
+    @Autowired
+    MealService mealService;
+
     @PostMapping("{id}")
     public ResponseEntity<Physical> createPhysical(@PathVariable Long id, @RequestBody Physical req) throws NotFoundException {
         return physicalService.create(id,req);
@@ -32,6 +37,11 @@ public class PhysicalController {
     @ResponseBody
     public ResponseEntity<Physical> getPhysical(@PathVariable Long id) throws NotFoundException {
         return physicalService.get(id);
+    }
+
+    @PostMapping("/meal/{id}")
+    public ResponseEntity<Meal> createMeal(@PathVariable Long id, @RequestBody Meal req) throws NotFoundException {
+        return mealService.create(id,req);
     }
 
 }

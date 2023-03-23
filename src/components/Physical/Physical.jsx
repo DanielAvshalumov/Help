@@ -3,6 +3,7 @@ import React, { useReducer, useState, useEffect, useRef } from "react"
 import { Link, Route, Routes } from "react-router-dom";
 import PhysicalService from "../../services/PhysicalService";
 import AddMeal from "./AddMeal";
+import Meals from "./Meals";
 
 function reducer(physical, action) {
     switch (action.type) {
@@ -111,7 +112,7 @@ const Physical = () => {
             <Grid container>
                 <Grid item md={5}>
                     <Typography variant="h3" textAlign="center">Macros</Typography>
-                    <Box display={"flex"} mt={3}>
+                    <Box display={"flex"} mt={3} mb={5}>
                         <Box display="flex" flexDirection={"column"} ml={12}>
                             <Typography variant="h4">Current</Typography>
                             <Typography variant="h5" mt={4}>Calories</Typography>
@@ -136,18 +137,14 @@ const Physical = () => {
                     </Box>
                 </Grid>
                 <Divider orientation="vertical" flexItem />
-                <Grid item textAlign={"center"} md={8} lg={6}>
-                    <Typography variant="h3" textAlign="center">Meals</Typography>
-                    <Link to="/home/physical/addmeal">
-                        <Button variant="contained" sx={{ mt:3 }}>Add a meal</Button>
-                    </Link>
-                </Grid>
+                    <Routes>
+                    <Route path="/meal" element={<Meals />} />
+                    <Route exact path="addmeal" element={<AddMeal/>} />
+                </Routes>
             </Grid>
             }
             {/* create two paths, one for meal selection and one for meal additions */}
-            <Routes path="/">
-                <Route path="addmeal" element={<AddMeal/>} />
-            </Routes>
+            
         </React.Fragment>
     )
 }

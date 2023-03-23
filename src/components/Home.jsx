@@ -6,6 +6,7 @@ import Mental from "./Mental";
 import Portal from "./Portal";
 import EmotionService from "../services/EmotionService";
 import Physical from "./Physical/Physical";
+import AddMeal from "./Physical/AddMeal";
 
 
 const Home = (props) => {
@@ -36,7 +37,7 @@ const Home = (props) => {
         nav("emotion");
     }
     const goToPhysical = () => {
-        nav("physical");
+        nav("physical/meal");
     }
     
     return (
