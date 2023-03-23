@@ -1,5 +1,7 @@
 package com.mental_journey.app.Service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.http.HttpStatus;
@@ -27,5 +29,10 @@ public class MealServiceImpl implements MealService{
         return new ResponseEntity<>(req,HttpStatus.OK);
     }
 
+    @Override
+    public ResponseEntity<List<Meal>> getAll(Long id) throws NotFoundException {
+        List<Meal> mealList = mealRepo.findAllByPhysicalId(id);
+        return new ResponseEntity<>(mealList,HttpStatus.OK);
+    }
 
 }

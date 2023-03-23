@@ -15,6 +15,10 @@ class PhysicalService {
     saveMeal(id,body) {
         return axios.post(base+`meal/${id}`, body, {headers:{'Content-Type':'application/json'}});
     }
+
+    getMeals(id) {
+        return axios.get(base+`meals/${id}`, {headers:{'Content-Type':'application/json'}});
+    }
 }
 
 export default new PhysicalService();

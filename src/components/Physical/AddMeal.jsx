@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import PhysicalService from "../../services/PhysicalService";
 
-const AddMeal = (props) => {
+const AddMeal = ({dispatch}) => {
     
     const [mealForm, setMealForm] = useState({mealName:"",calories:0,protein:0,carbs:0,fat:0});
 
@@ -21,6 +21,7 @@ const AddMeal = (props) => {
         const id = JSON.parse(localStorage.getItem('user')).id;
         console.log(id);
         const res = await PhysicalService.saveMeal(id,mealForm);
+        dispatch({type:'add-meal',payload:mealForm});
     }
 
     return (

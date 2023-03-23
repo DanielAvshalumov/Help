@@ -12,7 +12,7 @@ function reducer(physical, action) {
             ...physical,
             goal: 
             {
-                calories:action.payload.calories,
+                calories: action.payload.calories,
                 protein: action.payload.protein,
                 carbs: action.payload.carbs,
                 fat: action.payload.fat
@@ -21,8 +21,20 @@ function reducer(physical, action) {
         case("update-calories"): 
 
         
-        case("add-meal"): 
-            
+        case('add-meal'): 
+            return {
+                ...physical,
+                meals:
+                [...physical.meals,
+                    {
+                        mealName:action.payload.mealName,
+                        calories: action.payload.calories,
+                        protein: action.payload.protein,
+                        carbs: action.payload.carbs,
+                        fat : action.payload.fat
+                    }
+                ]
+            }
         
         default:
             return physical;
@@ -75,7 +87,6 @@ const Physical = () => {
         const id = JSON.parse(localStorage.getItem("user")).id
         const response = await PhysicalService.getPhysical(id)
                 .then((res) => {
-                    console.log(res.data);
                     if(res.data) {
                         setFirstUse(false);
                         dispatch({type:"on-load",payload:res.data})
@@ -88,7 +99,6 @@ const Physical = () => {
     useEffect(() => {
         getInitialPhysical();
         console.log(physical);
-        console.log(firstUse);
     },[]);
 
     const PhysicalConfigPage =  (
@@ -139,7 +149,7 @@ const Physical = () => {
                 <Divider orientation="vertical" flexItem />
                     <Routes>
                     <Route path="/meal" element={<Meals />} />
-                    <Route exact path="addmeal" element={<AddMeal/>} />
+                    <Route exact path="addmeal" element={<AddMeal dispatch={dispatch}/>} />
                 </Routes>
             </Grid>
             }

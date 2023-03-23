@@ -1,5 +1,7 @@
 package com.mental_journey.app.Controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.http.ResponseEntity;
@@ -42,6 +44,11 @@ public class PhysicalController {
     @PostMapping("/meal/{id}")
     public ResponseEntity<Meal> createMeal(@PathVariable Long id, @RequestBody Meal req) throws NotFoundException {
         return mealService.create(id,req);
+    }
+
+    @GetMapping("/meals/{id}")
+    public ResponseEntity<List<Meal>> getAllMeals(@PathVariable Long id) throws NotFoundException {
+        return mealService.getAll(id);
     }
 
 }
