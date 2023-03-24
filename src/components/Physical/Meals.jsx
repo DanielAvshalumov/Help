@@ -7,14 +7,13 @@ const Meals = ({ meals, dispatch }) => {
     const updateCaloriesFromMeal = (e) => {
         let target = e.target.getAttribute('value');
         let payload = meals.filter((element) => element.mealName === target);
-        console.log({...payload[0]});
         //Makes array with index one into single object
         dispatch({type:'eat',payload:{...payload[0]}});
     }
     
     const mealsElement = meals.map((item,key) => (
-            <Paper value={item.mealName} elevation={6} onClick={updateCaloriesFromMeal} sx={{mb:3, height:'60px', backgroundColor:'transparent'}}>
-                <Typography value={item.mealName} color={"lightgoldenrodyellow"} key={key} variant="h5"  >
+            <Paper key={key} value={item.mealName} elevation={6} onClick={updateCaloriesFromMeal} sx={{mb:3, height:'60px', backgroundColor:'transparent'}}>
+                <Typography value={item.mealName} color={"lightgoldenrodyellow"} variant="h5"  >
                     {item.mealName+" - Calories: "+item.calories+", Protein: "+item.protein+", Carbs: "+item.carbs+", Fat: "+item.fat}
                 </Typography>
             </Paper>

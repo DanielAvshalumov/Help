@@ -13,8 +13,12 @@ const AddMeal = ({dispatch}) => {
 
     const handleChange = (e) =>{
         const { name } = e.target;
-        const { value } = e.target;
+        let { value } = e.target;
         console.log(e.target);
+        // As to not save numbers as strings
+        if(name !== "mealName") {
+            value = parseInt(value);
+        }
         setMealForm(prev => ( {...prev, [name]:value } ) );
     }   
 
