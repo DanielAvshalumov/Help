@@ -1,6 +1,6 @@
 import { Divider, Grid, Typography, Box, TextField, Fade, Button } from "@mui/material";
 import React, { useReducer, useState, useEffect, useRef } from "react"
-import { Link, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import PhysicalService from "../../services/PhysicalService";
 import AddMeal from "./AddMeal";
 import Meals from "./Meals";
@@ -9,17 +9,20 @@ function reducer(physical, action) {
     switch (action.type) {
         case("on-load"): 
            return {
-            ...physical,
-            goal: 
-            {
-                calories: action.payload.calories,
-                protein: action.payload.protein,
-                carbs: action.payload.carbs,
-                fat: action.payload.fat
-            }
+                ...physical,
+                goal: 
+                {
+                    calories: action.payload.calories,
+                    protein: action.payload.protein,
+                    carbs: action.payload.carbs,
+                    fat: action.payload.fat
+                }
            }
-        case("update-calories"): 
-
+        case("load-meals"): 
+           return {
+                ...physical,
+                meals: action.payload
+           }
         
         case('add-meal'): 
             return {
@@ -84,21 +87,32 @@ const Physical = () => {
     }
     
     const getInitialPhysical = async () => {
-        const id = JSON.parse(localStorage.getItem("user")).id
+        const id = JSON.parse(localStorage.getItem("user")).id;
         const response = await PhysicalService.getPhysical(id)
                 .then((res) => {
                     if(res.data) {
                         setFirstUse(false);
-                        dispatch({type:"on-load",payload:res.data})
+                        dispatch({type:"on-load",payload:res.data});
                     }
                 }).catch((error) => {
                     console.log("didn't work",error);
                 });
     }
+    
+    const getInitialMeals = async () => {
+        const id = JSON.parse(localStorage.getItem("user")).id;
+        const response = await PhysicalService.getMeals(id)
+                .then((res) => {
+                    dispatch({type:"load-meals",payload:res.data});
+                })
+                .catch(error => {
+                    console.log(error);
+                })
+    }
 
     useEffect(() => {
         getInitialPhysical();
-        console.log(physical);
+        getInitialMeals();
     },[]);
 
     const PhysicalConfigPage =  (
@@ -148,12 +162,11 @@ const Physical = () => {
                 </Grid>
                 <Divider orientation="vertical" flexItem />
                     <Routes>
-                    <Route path="/meal" element={<Meals />} />
+                    <Route path="/meal" element={<Meals meals={physical.meals}/>} />
                     <Route exact path="addmeal" element={<AddMeal dispatch={dispatch}/>} />
                 </Routes>
             </Grid>
             }
-            {/* create two paths, one for meal selection and one for meal additions */}
             
         </React.Fragment>
     )
