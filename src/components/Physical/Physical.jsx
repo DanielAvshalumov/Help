@@ -38,6 +38,16 @@ function reducer(physical, action) {
                     }
                 ]
             }
+        case('eat'):
+            return {
+                ...physical,
+                current: {
+                    calories: physical.current.calories + action.payload.calories,
+                    protein: physical.current.protein + action.payload.protein,
+                    carbs: physical.current.carbs + action.payload.carbs,
+                    fat: physical.current.fat + action.payload.fat
+                }
+            }
         
         default:
             return physical;
@@ -115,6 +125,10 @@ const Physical = () => {
         getInitialMeals();
     },[]);
 
+    useEffect(() => {
+        console.log(physical);
+    },[physical]);
+
     const PhysicalConfigPage =  (
         <>
             <Typography variant="h3" textAlign={"center"}>Enter your Macros here</Typography>
@@ -152,7 +166,7 @@ const Physical = () => {
                             <Typography variant="h5" mt={4}>{physical.goal.fat}</Typography>
                         </Box>
                         <Box display="flex" flexDirection={"column"} ml={12}>
-                            <Typography variant="h4">Left</Typography>
+                            <Typography variant="h4">Current</Typography>
                             <Typography variant="h5" mt={4}>{physical.current.calories}</Typography>
                             <Typography variant="h5" mt={4}>{physical.current.protein}</Typography>
                             <Typography variant="h5" mt={4}>{physical.current.carbs}</Typography>
@@ -162,7 +176,7 @@ const Physical = () => {
                 </Grid>
                 <Divider orientation="vertical" flexItem />
                     <Routes>
-                    <Route path="/meal" element={<Meals meals={physical.meals}/>} />
+                    <Route path="/meal" element={<Meals meals={physical.meals} dispatch={dispatch}/>} />
                     <Route exact path="addmeal" element={<AddMeal dispatch={dispatch}/>} />
                 </Routes>
             </Grid>

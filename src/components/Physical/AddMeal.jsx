@@ -14,6 +14,7 @@ const AddMeal = ({dispatch}) => {
     const handleChange = (e) =>{
         const { name } = e.target;
         const { value } = e.target;
+        console.log(e.target);
         setMealForm(prev => ( {...prev, [name]:value } ) );
     }   
 
@@ -30,7 +31,7 @@ const AddMeal = ({dispatch}) => {
                 <Typography variant="h3" textAlign="center">Add a Meal</Typography>
                 <form>
                     <Box display="flex" flexDirection={"column"} alignItems="center"  onChange={handleChange}>
-                        <TextField placeholder="Name" name="mealName" autoCorrect="true" sx={{ marginTop:2 }}/>
+                        <TextField placeholder="Name" name="mealName"  sx={{ marginTop:2 }}/>
                         <TextField placeholder="Calories" type="number" name="calories" sx={{ marginTop:2 }}/>
                         <TextField placeholder="Protein" type="number" name="protein" sx={{ marginTop:2 }}/>
                         <TextField placeholder="Carbs" type="number" name="carbs" sx={{ marginTop:2 }}/>

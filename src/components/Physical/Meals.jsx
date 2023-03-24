@@ -2,14 +2,24 @@ import { Grid, Typography, Box, Button, Grow, Paper } from "@mui/material";
 import { Link } from "react-router-dom";
 
 
-const Meals = ({ meals }) => {
+const Meals = ({ meals, dispatch }) => {
+
+    const updateCaloriesFromMeal = (e) => {
+        let target = e.target.getAttribute('value');
+        let payload = meals.filter((element) => element.mealName === target);
+        console.log({...payload[0]});
+        //Makes array with index one into single object
+        dispatch({type:'eat',payload:{...payload[0]}});
+    }
     
     const mealsElement = meals.map((item,key) => (
-            <Paper elevation={6} sx={{mb:3, height:'60px', backgroundColor:'transparent'}}>
-                <Typography  color={"lightgoldenrodyellow"} key={key} variant="h5" >{item.mealName+" "+item.protein+" "+item.calories}</Typography>
+            <Paper value={item.mealName} elevation={6} onClick={updateCaloriesFromMeal} sx={{mb:3, height:'60px', backgroundColor:'transparent'}}>
+                <Typography value={item.mealName} color={"lightgoldenrodyellow"} key={key} variant="h5"  >
+                    {item.mealName+" - Calories: "+item.calories+", Protein: "+item.protein+", Carbs: "+item.carbs+", Fat: "+item.fat}
+                </Typography>
             </Paper>
     ));
-    console.log(meals);
+    
     return (
         <>
             <Grid item md={8} lg={6}>
