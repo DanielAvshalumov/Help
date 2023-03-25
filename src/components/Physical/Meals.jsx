@@ -1,5 +1,6 @@
 import { Grid, Typography, Box, Button, Grow, Paper } from "@mui/material";
 import { Link } from "react-router-dom";
+import PhysicalService from "../../services/PhysicalService";
 
 
 const Meals = ({ meals, dispatch }) => {
@@ -10,13 +11,25 @@ const Meals = ({ meals, dispatch }) => {
         //Makes array with index one into single object
         dispatch({type:'eat',payload:{...payload[0]}});
     }
+
+    const handleRemove = async (e) => {
+        e.preventDefault();
+        let id = e.target.value;
+        const res = await PhysicalService.removeMeal(id).catch(error => console.log(error));
+        console.log(id);
+        dispatch({type:'remove-meal',payload:id});
+        console.log(meals);
+    }
     
     const mealsElement = meals.map((item,key) => (
-            <Paper key={key} value={item.mealName} elevation={6} onClick={updateCaloriesFromMeal} sx={{mb:3, height:'60px', backgroundColor:'transparent'}}>
+        <Box display={"flex"}>
+            <Paper key={key} value={item.mealName} elevation={6} onClick={updateCaloriesFromMeal} sx={{mb:3, height:'60px', backgroundColor:'transparent',}}>
                 <Typography value={item.mealName} color={"lightgoldenrodyellow"} variant="h5"  >
                     {item.mealName+" - Calories: "+item.calories+", Protein: "+item.protein+", Carbs: "+item.carbs+", Fat: "+item.fat}
                 </Typography>
             </Paper>
+            <Button variant="contained" color="secondary" value={item.id} onClick={handleRemove} sx={{height:20,}}>Remove</Button>
+        </Box>
     ));
     
     return (

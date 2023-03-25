@@ -5,82 +5,12 @@ import PhysicalService from "../../services/PhysicalService";
 import AddMeal from "./AddMeal";
 import Meals from "./Meals";
 
-function reducer(physical, action) {
-    switch (action.type) {
-        case("on-load"): 
-           return {
-                ...physical,
-                goal: 
-                {
-                    calories: action.payload.calories,
-                    protein: action.payload.protein,
-                    carbs: action.payload.carbs,
-                    fat: action.payload.fat
-                }
-           }
-        case("load-meals"): 
-           return {
-                ...physical,
-                meals: action.payload
-           }
-        
-        case('add-meal'): 
-            return {
-                ...physical,
-                meals:
-                [...physical.meals,
-                    {
-                        mealName:action.payload.mealName,
-                        calories: action.payload.calories,
-                        protein: action.payload.protein,
-                        carbs: action.payload.carbs,
-                        fat : action.payload.fat
-                    }
-                ]
-            }
-        case('eat'):
-            return {
-                ...physical,
-                current: {
-                    calories: physical.current.calories + action.payload.calories,
-                    protein: physical.current.protein + action.payload.protein,
-                    carbs: physical.current.carbs + action.payload.carbs,
-                    fat: physical.current.fat + action.payload.fat
-                }
-            }
-        
-        default:
-            return physical;
-    }
-}
 
-const Physical = () => {
 
-    const physicalState = {
-        goal:{
-            calories : 0,
-            protein: 0,
-            carbs: 0,
-            fat: 0,
-        },
-        current: {
-            calories : 0,
-            protein: 0,
-            carbs: 0,
-            fat: 0,
-        },
-        meals: [
-            {
-                mealName: "",
-                calories: 0,
-                protein: 0,
-                carbs: 0,
-                fat: 0
-            }  
-        ]
-    }
+const Physical = ( { physical, dispatch } ) => {
+
+    
     const [firstUse, setFirstUse] = useState(true);
-    const [physical, dispatch] = useReducer(reducer, physicalState);
     const calorieRef = useRef();
 
     const handleSubmit = async (e) => {

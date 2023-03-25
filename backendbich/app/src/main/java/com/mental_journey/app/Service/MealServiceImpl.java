@@ -35,4 +35,10 @@ public class MealServiceImpl implements MealService{
         return new ResponseEntity<>(mealList,HttpStatus.OK);
     }
 
+    @Override 
+    public ResponseEntity<Meal> remove(Long id) {
+        mealRepo.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
 }

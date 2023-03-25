@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -49,6 +50,11 @@ public class PhysicalController {
     @GetMapping("/meals/{id}")
     public ResponseEntity<List<Meal>> getAllMeals(@PathVariable Long id) throws NotFoundException {
         return mealService.getAll(id);
+    }
+
+    @DeleteMapping("meal/{id}")
+    public ResponseEntity<Meal> deleteMeal(@PathVariable Long id) {
+        return mealService.remove(id);
     }
 
 }

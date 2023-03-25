@@ -9,6 +9,7 @@ import com.mental_journey.app.Model.Meal;
 
 public interface MealService {
 
-    ResponseEntity<Meal> create(Long id, Meal req) throws NotFoundException;
-    ResponseEntity<List<Meal>> getAll(Long id) throws NotFoundException;
+    public ResponseEntity<Meal> create(Long id, Meal req) throws NotFoundException;
+    public ResponseEntity<List<Meal>> getAll(Long id) throws NotFoundException;
+    public ResponseEntity<Meal> remove(Long id);
 }

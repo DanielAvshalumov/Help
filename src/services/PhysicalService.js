@@ -19,6 +19,10 @@ class PhysicalService {
     getMeals(id) {
         return axios.get(base+`meals/${id}`, {headers:{'Content-Type':'application/json'}});
     }
+
+    removeMeal(id) {
+        return axios.delete(base+`meal/${id}`, {headers:{'Content-Type':'application/json'}});
+    }
 }
 
 export default new PhysicalService();

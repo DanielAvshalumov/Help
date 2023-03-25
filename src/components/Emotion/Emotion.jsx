@@ -17,13 +17,13 @@ const MyRadio = (props) => {
 }
 
 
-const Emotion = ({ data, updateData }) => {
+const Emotion = ({ data }) => {
 
     const [mood,setMood] = useState(0);
     
     const [checked,setChecked] = useState(false);
     const [comment, setComment] = useState("");
-
+    // Change here
     const [graphData, setGraphData] = useState(data.map(item => (item.rate)));
 
     const onSubmit = async (e) => {
@@ -41,12 +41,12 @@ const Emotion = ({ data, updateData }) => {
     return (
         <>
             <Grid container display="flex">
-                <Grid mt={4} ml={49} item>
-                    <Paper>
-                        <Typography variant='h5'>How are you feeling</Typography>
+                <Grid mt={4} ml={49} item >
+                    <Paper sx={{ padding:1, borderRadius:3 }}>
+                        <Typography variant='h5' >How are you feeling</Typography>
                         <form onSubmit={onSubmit}>
                             <FormControl>
-                                <FormLabel sx={{ marginLeft:9 }} >I feel ... </FormLabel>
+                                <FormLabel sx={{ marginLeft:9}} >I feel ... </FormLabel>
                                 <RadioGroup defaultValue onChange={handleClick}>
                                     <FormControlLabel value={5} control={<MyRadio />} label="😊 Never Better" />
                                     <FormControlLabel value={4} control={<MyRadio />} label="🙂 Good" />
