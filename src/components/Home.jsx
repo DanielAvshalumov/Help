@@ -91,13 +91,13 @@ function reducer(physical, action) {
                 ...physical,
                 meals: action.payload
            }
-        
         case('add-meal'): 
             return {
                 ...physical,
                 meals:
                 [...physical.meals,
                     {
+                        id:action.payload.id,
                         mealName:action.payload.mealName,
                         calories: action.payload.calories,
                         protein: action.payload.protein,
@@ -116,15 +116,12 @@ function reducer(physical, action) {
                     fat: physical.current.fat + action.payload.fat
                 }
             }
-        
         case('remove-meal'):
-            let meal = physical.meals.filter(item => (item.id !== parseInt(action.payload)));
-            console.log("trying to delete",meal);
+            const meal = physical.meals.filter(item => (item.id !== parseInt(action.payload)));
             return {
                 ...physical,
                 meals:meal
             }
-        
         default:
             return physical;
     }

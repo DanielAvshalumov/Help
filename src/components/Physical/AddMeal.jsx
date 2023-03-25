@@ -25,8 +25,9 @@ const AddMeal = ( { dispatch } ) => {
     const handleSubmit = async () => {
         const id = JSON.parse(localStorage.getItem('user')).id;
         console.log(id);
-        await PhysicalService.saveMeal(id,mealForm);
-        dispatch({type:'add-meal',payload:mealForm});
+        const res = await PhysicalService.saveMeal(id,mealForm);
+        console.log(res);
+        dispatch({type:'add-meal',payload:res.data});
     }
 
     return (
