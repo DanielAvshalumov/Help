@@ -23,6 +23,9 @@ function Navigator(props) {
             nav("/login");
         }
     }
+    const handleMenu = (e) => {
+        nav("/home/portal");
+    }
 
     return (
         <>
@@ -30,7 +33,7 @@ function Navigator(props) {
                 <AppBar position="static" color="secondary">
                     <Toolbar variant="dense">
                         { props.userLogged &&
-                        (<IconButton variant="dense" aria-label="menu" sx={{ mr:2 }} color="inherit">
+                        (<IconButton aria-label="menu" sx={{ mr:2 }} color="inherit" onClick={handleMenu}>
                             <MenuIcon />
                         </IconButton>)
                         }

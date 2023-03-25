@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 function LogIn(props) {
 
     const [logInForm, setLogInForm] = useState({name:"",password:""});
-    const [staySignedIn, setStaySignedIn] = useState(false);
+    const [staySignedIn, setStaySignedIn] = useState(true);
 
     const handleLogInChange = (e) => {
         const {name, value} = e.target;
