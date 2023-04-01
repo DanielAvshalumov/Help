@@ -16,9 +16,8 @@ const Meals = ({ meals, dispatch }) => {
         e.preventDefault();
         let id = e.target.value;
         const res = await PhysicalService.removeMeal(id).catch(error => console.log(error));
-        console.log(id);
         dispatch({type:'remove-meal',payload:id});
-        console.log(meals);
+        console.log(res);
     }
     
     const mealsElement = meals.map((item,key) => (

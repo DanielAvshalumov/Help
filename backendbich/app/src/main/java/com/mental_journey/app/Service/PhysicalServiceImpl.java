@@ -30,7 +30,6 @@ public class PhysicalServiceImpl implements PhysicalService{
             throw new NotFoundException();
         }
         req.setId(id);
-        req.setUser(user.get());
         Physical physical = physicalRepo.save(req);
         return new ResponseEntity<>(physical,HttpStatus.OK);
     }

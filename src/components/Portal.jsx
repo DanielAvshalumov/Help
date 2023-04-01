@@ -42,24 +42,24 @@ const Portal = (props) => {
         <>
             <Grid container display="flex" flexDirection="column">
                 <Grid item mb={4}>
-                    <Typography align="center" variant="h3">Welcome to your page, {props.userLogged.name}</Typography>
+                    <Typography align="center" variant="h2" fontFamily={"NewYork"} >Welcome to your page, {props.userLogged.name}</Typography>
                 </Grid>
 
                 <Box display="flex" justifyContent={"space-evenly"}>
                     <Grid item>
-                        <Paper elevation={17} onClick={props.goTo.mental} sx= {{"&:hover":{cursor:"pointer"}, "padding":1, "backgroundColor":"transparent", "opacity":0.8, "borderRadius":3}}>
+                        <Paper elevation={17} onClick={props.goTo.mental} sx= {{"&:hover":{cursor:"pointer"}, "padding":1, "backgroundColor":"thistle", "borderRadius":3}}>
                             <Typography variant="h4">Mental Health</Typography>
                             <Divider></Divider>
                         </Paper>
                     </Grid>
                     <Grid item ml={4}>
-                        <Paper elevation={17} onClick={props.goTo.physical} sx= {{"&:hover":{cursor:"pointer"},"padding":1,"backgroundColor":"transparent", "opacity":0.8, "borderRadius":3}}>
+                        <Paper elevation={17} onClick={props.goTo.physical} sx= {{"&:hover":{cursor:"pointer"},"padding":1,"backgroundColor":"thistle", "borderRadius":3}}>
                             <Typography variant="h4">Physical Health</Typography>
                             <Divider></Divider>
                         </Paper>
                     </Grid>
                     <Grid item>
-                        <Paper elevation={17} onClick={props.goTo.emotion} sx= {{"&:hover":{cursor:"pointer"}, "padding":1, "backgroundColor":"transparent", "opacity":0.8, "borderRadius":3}}>
+                        <Paper elevation={17} onClick={props.goTo.emotion} sx= {{"&:hover":{cursor:"pointer"}, "padding":1, "backgroundColor":"thistle", "borderRadius":3}}>
                             <Typography variant="h4">Emotional Health</Typography>
                             <Divider/>
                             {emotionPreview}

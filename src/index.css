@@ -3,7 +3,30 @@
     src:local('newyorkfont'), url(./fonts/newyorkfont.otf) format('opentype');
 }
 
-body {
-    background-image: url("./pexels-alexander-kovalev-2847648.jpg");
-    background-size: cover;
+:root {
+    --s1: rgba(39, 33, 205, 0.67);
+    --s2: rgba(227, 20, 96, 0.67);
 }
+
+@keyframes background-loop {
+    from {
+        background-position: 0% center;
+    }
+    to {
+        background-position: -200% center;
+    }
+}
+
+body {
+    animation: background-loop 10s linear infinite;
+    background: linear-gradient(
+        to right,
+        var(--s1),
+        var(--s2),
+        var(--s1)
+    );
+    
+    background-size: 200%;
+    margin: 0px;
+}
+
