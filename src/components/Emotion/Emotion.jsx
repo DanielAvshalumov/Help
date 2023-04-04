@@ -19,8 +19,7 @@ const MyRadio = (props) => {
 
 const Emotion = ({ data }) => {
 
-    const [mood,setMood] = useState(0);
-    
+    const [mood,setMood] = useState(0);    
     const [checked,setChecked] = useState(false);
     const [comment, setComment] = useState("");
     // Change here
@@ -29,7 +28,11 @@ const Emotion = ({ data }) => {
     const onSubmit = async (e) => {
         e.preventDefault();
         let id = JSON.parse(localStorage.getItem("user")).id;
-        const res = await EmotionService.createEmotion(id,mood);
+        let body = {
+            rate:mood,
+            message:comment,
+        };
+        const res = await EmotionService.createEmotion(id,body);
         setGraphData((prev) => [...prev,res.data.rate]);
         console.log(res);
     }
@@ -37,6 +40,10 @@ const Emotion = ({ data }) => {
         setMood(e.target.value);
         setChecked(true);
     }
+
+    useEffect(() => {
+        console.log(comment);
+    },[comment]);
 
     return (
         <>

@@ -29,8 +29,6 @@ public class UserLogin {
                 inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private Physical physical;
     
     public UserLogin() {
     }

@@ -1,5 +1,6 @@
 package com.mental_journey.app.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,6 +27,7 @@ public class EmotionServiceImpl implements EmotionService {
     public ResponseEntity<Emotion> create(Long id, Emotion req) throws NotFoundException {
         Emotion emotion = userRepo.findById(id).map(user -> {
             req.setUser(user);
+            req.setDate(new Date());
             return emotionRepo.save(req);
         }).orElseThrow(() -> new NotFoundException());
         return new ResponseEntity<>(emotion,HttpStatus.OK);

@@ -4,8 +4,8 @@ const base = "http://localhost:8080/api/emotions/"
 
 class EmotionService {
 
-    createEmotion(userId, emotion) {
-        return axios.post(base+`${userId}`, emotion, {headers:{'Content-Type': 'application/json'}});
+    createEmotion(userId, body) {
+        return axios.post(base+`${userId}`, body, {headers:{'Content-Type': 'application/json'}});
     }
 
     getAllEmotions(pathId) {

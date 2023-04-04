@@ -26,7 +26,7 @@ public class Meal {
     @Column
     private int protein;
 
-    @JoinColumn
+    @Column
     private int carbs;
 
     private int fat;

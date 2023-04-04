@@ -21,6 +21,9 @@ public class Emotion {
     @Column
     private Integer rate;
 
+    @Column
+    private String message;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id")
     @JsonIgnore
@@ -30,9 +33,10 @@ public class Emotion {
 
     }
 
-    public Emotion(Integer rate) {
+    public Emotion(Integer rate, String message) {
         this.rate = rate;
         this.createdOn = new Date();
+        this.message = message;
     }
 
     public Long getId() {
@@ -47,9 +51,21 @@ public class Emotion {
         this.rate = rate;
     }
 
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
     public Date getDate() {
         return createdOn;
     } 
+
+    public void setDate(Date date) {
+        this.createdOn = date;
+    }
 
     public void setUser(UserLogin user) {
         this.user = user;

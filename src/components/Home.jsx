@@ -2,7 +2,7 @@ import React, { useReducer } from "react";
 import { useState } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import Emotion from "./Emotion/Emotion";
-import Mental from "./Mental";
+import Mental from "./Mental/Mental";
 import Portal from "./Portal";
 import EmotionService from "../services/EmotionService";
 import Physical from "./Physical/Physical";
