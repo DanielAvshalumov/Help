@@ -5,6 +5,7 @@ import { useState } from 'react';
 import EmotionService from '../../services/EmotionService';
 
 import ZoomableLineChart from './Graph';
+import Thoughts from './Thoughts';
 
 const MyRadio = (props) => {
     return (
@@ -22,7 +23,6 @@ const Emotion = ({ data }) => {
     const [mood,setMood] = useState(0);    
     const [checked,setChecked] = useState(false);
     const [comment, setComment] = useState("");
-    // Change here
     const [graphData, setGraphData] = useState(data.map(item => (item.rate)));
 
     const onSubmit = async (e) => {
@@ -41,14 +41,14 @@ const Emotion = ({ data }) => {
         setChecked(true);
     }
 
-    useEffect(() => {
-        console.log(comment);
-    },[comment]);
-
     return (
         <>
-            <Grid container display="flex">
-                <Grid mt={4} ml={49} item >
+            <Grid container display="flex" justifyContent={'space-around'} ml={-5}>
+                <Grid item>
+                    <ZoomableLineChart data={graphData} />
+                </Grid>
+
+                <Grid item >
                     <Paper sx={{ padding:1, borderRadius:3 }}>
                         <Typography variant='h5' >How are you feeling</Typography>
                         <form onSubmit={onSubmit}>
@@ -66,22 +66,25 @@ const Emotion = ({ data }) => {
                         </form>
                     </Paper>
                 </Grid>
-                <Grid ml={14} mt={10} item>
-                    <ZoomableLineChart data={graphData} />
+                
+                <Grid mr={-10} item>
+                    <Thoughts data={graphData}/>
                 </Grid>
-                <Grid item m={9}>
+                
+                    
                 {checked && 
                                 <TextField 
                                     onChange={(e) => setComment(e.target.value)}
+                                    variant="outlined"
                                     label="Talk about it"
                                     size="large"
                                     fullWidth
                                     multiline
-                                    rows={10}
+                                    rows={5}
                                     color="secondary"
-                                    sx={{marginLeft:"300px", width:"600px"}}
+                                    sx={{ width:"800px", marginTop:5}}
                                 />}
-                </Grid>
+                
             </Grid>
         </>
     )

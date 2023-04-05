@@ -5,10 +5,66 @@ import PhysicalService from "../../services/PhysicalService";
 import AddMeal from "./AddMeal";
 import Meals from "./Meals";
 
+function reducer(physical, action) {
+    switch (action.type) {
+        case("on-load"): 
+           return {
+                ...physical,
+                goal: 
+                {
+                    calories: action.payload.calories,
+                    protein: action.payload.protein,
+                    carbs: action.payload.carbs,
+                    fat: action.payload.fat
+                }
+           }
+        case("load-meals"): 
+           return {
+                ...physical,
+                meals: action.payload
+           }
+        case('add-meal'): 
+            return {
+                ...physical,
+                meals:
+                [...physical.meals,
+                    {
+                        id:action.payload.id,
+                        mealName:action.payload.mealName,
+                        calories: action.payload.calories,
+                        protein: action.payload.protein,
+                        carbs: action.payload.carbs,
+                        fat : action.payload.fat
+                    }
+                ]
+            }
+        case('eat'):
+            return {
+                ...physical,
+                current: {
+                    calories: physical.current.calories + action.payload.calories,
+                    protein: physical.current.protein + action.payload.protein,
+                    carbs: physical.current.carbs + action.payload.carbs,
+                    fat: physical.current.fat + action.payload.fat
+                }
+            }
+        case('remove-meal'):
+            const meal = physical.meals.filter(item => (item.id !== parseInt(action.payload)));
+            return {
+                ...physical,
+                meals:meal
+            }
+        default:
+            return physical;
+    }
+}
 
 
-const Physical = ( { physical, dispatch } ) => {
+const Physical = ( { physicalState } ) => {
 
+    
+    
+    const [physical, dispatch] = useReducer(reducer, physicalState);
     
     const [firstUse, setFirstUse] = useState(true);
     const calorieRef = useRef();
@@ -57,7 +113,7 @@ const Physical = ( { physical, dispatch } ) => {
 
     useEffect(() => {
         console.log(physical);
-    },[physical]);
+    },[]);
 
     const PhysicalConfigPage =  (
         <>
