@@ -35,6 +35,8 @@ const Home = (props) => {
         ]
     }
     
+    const [physical, dispatch] = useReducer(reducer, physicalState);
+
     const [data,setData] = useState([]);
 
     const updateData = () => {
