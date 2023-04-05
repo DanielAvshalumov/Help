@@ -34,8 +34,8 @@ const Home = (props) => {
         ]
     }
     
-    const [data,setData] = useState([]);
     const [physical, dispatch] = useReducer(reducer, physicalState);
+    const [data,setData] = useState([]);
 
     const updateData = () => {
         let mounted = true
