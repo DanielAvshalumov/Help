@@ -68,7 +68,7 @@ const Emotion = ({ data }) => {
                 </Grid>
                 
                 <Grid mr={-10} item>
-                    <Thoughts data={graphData}/>
+                    <Thoughts data={data}/>
                 </Grid>
                 
                     
