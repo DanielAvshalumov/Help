@@ -1,22 +1,16 @@
-import { Accordion, Box, Grid, Typography } from "@mui/material";
+import { Accordion, AccordionDetails, AccordionSummary, Box, Button, Grid, Typography } from "@mui/material";
 import react, { useState } from "react";
 import ClockGraph from "./ClockGraph";
 
 const Mental = () => {
 
-    const [expanded, setExpanded] = useState(false);
-    const handleChange = panel => {
+    
 
-    }
-
-    const activityElements = () => {
-
-    }
     
     return (
         <>
             <Box>
-                <Grid container>
+                <Grid container display="flex" justifyContent="space-around" ml={-6}>
                     <Grid item>
                         <Typography variant="h3">{new Date().toLocaleDateString()}</Typography>
                     </Grid>
@@ -25,7 +19,28 @@ const Mental = () => {
                     </Grid>
                     <Grid item>
                         <Accordion>
-                            <Typography>Cool</Typography>
+                            <AccordionSummary>
+                                <Typography>Meditation</Typography>
+                            </AccordionSummary>
+                            <AccordionDetails>
+                                <Button variant="contained">Start</Button>
+                            </AccordionDetails>
+                        </Accordion>
+                        <Accordion>
+                            <AccordionSummary>
+                                <Typography>Exercise</Typography>
+                            </AccordionSummary>
+                            <AccordionDetails>
+                                <Button variant="contained">Start</Button>
+                            </AccordionDetails>
+                        </Accordion>
+                        <Accordion>
+                            <AccordionSummary>
+                                <Typography>Studying</Typography>
+                            </AccordionSummary>
+                            <AccordionDetails>
+                                <Button variant="contained">Start</Button>
+                            </AccordionDetails>
                         </Accordion>
                     </Grid>
                 </Grid>

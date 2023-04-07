@@ -34,3 +34,8 @@ body {
     stroke: #000;
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
 }
+
+#clock .second-label {
+    font-size: 12px;
+}
+
