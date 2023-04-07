@@ -24,9 +24,13 @@ body {
         var(--s1),
         var(--s2),
         var(--s1)
-    );
-    
+    );    
     background-size: 200%;
     margin: 0px;
+    overflow: hidden;
 }
 
+#clock {
+    stroke: #000;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+}

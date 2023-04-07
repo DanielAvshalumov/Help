@@ -43,12 +43,12 @@ const Emotion = ({ data }) => {
 
     return (
         <>
-            <Grid container display="flex" justifyContent={'space-around'} ml={-5}>
+            <Grid container display="flex" justifyContent={"space-around"}>
                 <Grid item>
                     <ZoomableLineChart data={graphData} />
                 </Grid>
 
-                <Grid item >
+                <Grid mr={-5} item >
                     <Paper sx={{ padding:1, borderRadius:3 }}>
                         <Typography variant='h5' >How are you feeling</Typography>
                         <form onSubmit={onSubmit}>
@@ -67,7 +67,7 @@ const Emotion = ({ data }) => {
                     </Paper>
                 </Grid>
                 
-                <Grid mr={-10} item>
+                <Grid mr={-20} item>
                     <Thoughts data={data}/>
                 </Grid>
                 
@@ -82,7 +82,7 @@ const Emotion = ({ data }) => {
                                     multiline
                                     rows={5}
                                     color="secondary"
-                                    sx={{ width:"800px", marginTop:5}}
+                                    sx={{ width:"800px", marginTop:-20}}
                                 />}
                 
             </Grid>

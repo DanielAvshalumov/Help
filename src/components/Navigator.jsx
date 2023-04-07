@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import { AppBar, Toolbar, Box, Button, IconButton } from "@mui/material";
-import MenuIcon from '@mui/icons-material/Menu';
+import HomeIcon from '@mui/icons-material/Home';
 import { useLocation, useNavigate } from "react-router-dom";
 
 
@@ -34,7 +34,7 @@ function Navigator(props) {
                     <Toolbar variant="dense">
                         { props.userLogged &&
                         (<IconButton aria-label="menu" sx={{ mr:2 }} color="inherit" onClick={handleMenu}>
-                            <MenuIcon />
+                            <HomeIcon />
                         </IconButton>)
                         }
                         {

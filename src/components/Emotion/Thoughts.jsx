@@ -10,7 +10,7 @@ export default function Thoughts( { data } ) {
     let nodes = data;
     useEffect(() => {
         let simulation = forceSimulation(nodes)
-            .force('charge', forceManyBody().strength(-40))
+            .force('charge', forceManyBody().strength(-30))
             .force('center', forceCenter(width / 2, height / 2))
             .on('tick', ticked);
         function ticked() {
@@ -24,7 +24,7 @@ export default function Thoughts( { data } ) {
                 .attr('fill', 'yellow')
                 .style('cursor','pointer')
                 .on("click", (data) => {
-                    alert(data.target.__data__);
+                    console.log(data.target.__data__);
                 });
         }
     },[data]);
