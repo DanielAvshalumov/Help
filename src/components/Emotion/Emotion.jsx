@@ -23,6 +23,7 @@ const Emotion = ({ data }) => {
     const [mood,setMood] = useState(0);    
     const [checked,setChecked] = useState(false);
     const [comment, setComment] = useState("");
+    // change
     const [graphData, setGraphData] = useState(data.map(item => (item.rate)));
 
     const onSubmit = async (e) => {
@@ -33,6 +34,7 @@ const Emotion = ({ data }) => {
             message:comment,
         };
         const res = await EmotionService.createEmotion(id,body);
+        // change
         setGraphData((prev) => [...prev,res.data.rate]);
         console.log(res);
     }
@@ -67,7 +69,7 @@ const Emotion = ({ data }) => {
                     </Paper>
                 </Grid>
                 
-                <Grid mr={-20} item>
+                <Grid mr={-20} item > 
                     <Thoughts data={data}/>
                 </Grid>
                 

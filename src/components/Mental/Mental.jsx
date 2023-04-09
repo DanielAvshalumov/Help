@@ -4,7 +4,7 @@ import ClockGraph from "./ClockGraph";
 
 const Mental = () => {
 
-    
+        
 
     
     return (
