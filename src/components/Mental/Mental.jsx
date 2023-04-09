@@ -4,7 +4,7 @@ import ClockGraph from "./ClockGraph";
 
 const Mental = () => {
 
-        
+    const [mentalHealth, setMentalHealth] = useState();    
 
     
     return (

@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import { arc, create, range, scaleLinear, select } from "d3"
+import { arc, create, easeLinear, range, scaleLinear, select } from "d3"
 import { useEffect, useRef } from "react";
 
 
@@ -44,21 +44,37 @@ export default function ClockGraph() {
             .attr("y", d => -216 * Math.cos(sixty(d) * radians) + 7)
             .text(d => d);
             
-        const arcGen = arc()
+        const arcMain = arc()
             .innerRadius(200)
             .outerRadius(180)
             .startAngle(0)
-            .endAngle(2*Math.PI);
+            .endAngle(Math.PI);
 
-        svgContent
+        const arcSub = arc()
+            .innerRadius(100)
+            .outerRadius(90)
+            .startAngle(Math.PI)
+            .endAngle(Math.PI*2);
+
+        const currentActivity = svgContent
             .append("path")
-            .attr("d", arcGen)
-            .attr("fill","pink")
+            .attr("d", arcMain)
+            .attr("fill","lightblue")
             .attr("stroke", "gray")
             .attr("stroke-width", 1)
-            .style("opacity","0.2");
+            .style("opacity","0.4");
 
-        console.log(svgContent);
+        const subAcivity = svgContent
+            .append("path")
+            .attr("d", arcSub)
+            .attr("fill", "pink")
+            .attr('stroke', "gray")
+            .attr("stroke-width", 1)
+
+            
+        
+        console.log(svg);
+
             
     },[]);
 
