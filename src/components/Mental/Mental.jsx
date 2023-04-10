@@ -1,10 +1,19 @@
-import { Accordion, AccordionDetails, AccordionSummary, Box, Button, Grid, Typography } from "@mui/material";
+import { Box, Button, Grid, Typography } from "@mui/material";
 import react, { useState } from "react";
 import ClockGraph from "./ClockGraph";
+import ActivityList from "./ActivityList";
 
 const Mental = () => {
 
-    const [mentalHealth, setMentalHealth] = useState();    
+    const [activity, setActivity] = useState([{
+        name: "",
+        type: "",
+        duration: 0,
+        goal: 0,
+        checked: false,
+        ongoing: false,
+        notes:["",],
+    }]);    
 
     
     return (
@@ -18,30 +27,7 @@ const Mental = () => {
                         <ClockGraph />
                     </Grid>
                     <Grid item>
-                        <Accordion>
-                            <AccordionSummary>
-                                <Typography>Meditation</Typography>
-                            </AccordionSummary>
-                            <AccordionDetails>
-                                <Button variant="contained">Start</Button>
-                            </AccordionDetails>
-                        </Accordion>
-                        <Accordion>
-                            <AccordionSummary>
-                                <Typography>Exercise</Typography>
-                            </AccordionSummary>
-                            <AccordionDetails>
-                                <Button variant="contained">Start</Button>
-                            </AccordionDetails>
-                        </Accordion>
-                        <Accordion>
-                            <AccordionSummary>
-                                <Typography>Studying</Typography>
-                            </AccordionSummary>
-                            <AccordionDetails>
-                                <Button variant="contained">Start</Button>
-                            </AccordionDetails>
-                        </Accordion>
+                        <ActivityList activity={activity} />
                     </Grid>
                 </Grid>
             </Box>

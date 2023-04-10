@@ -33,7 +33,6 @@ export default function ClockGraph() {
             .attr("y1",200)
             .attr("y2",190)
             .attr("transform", d => `rotate(${sixty(d)})`)
-       
             .selectAll(".second-label")
             .data(range(5,61,5))
             .enter()
@@ -73,7 +72,7 @@ export default function ClockGraph() {
 
             
         
-        console.log(svg);
+        console.log(svgContent);
 
             
     },[]);
