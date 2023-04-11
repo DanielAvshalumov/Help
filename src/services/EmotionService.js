@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const base = "http://localhost:8080/api/emotions/"
+const base = "http://localhost:8080/api/emotions/";
 
 class EmotionService {
 

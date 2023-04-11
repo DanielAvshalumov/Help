@@ -59,8 +59,7 @@ export default function ClockGraph() {
             .append("path")
             .attr("d", arcMain)
             .attr("fill","lightblue")
-            .attr("stroke", "gray")
-            .attr("stroke-width", 1)
+            
             .style("opacity","0.4");
 
         const subAcivity = svgContent

@@ -20,6 +20,8 @@ public class UserLogin {
     
     private String username;
 
+    private Integer rewards;
+
     @JsonIgnore
     private String password;
 
@@ -54,6 +56,7 @@ public class UserLogin {
         this.username = username;
     }
     
+    @JsonIgnore
     public String getPassword() {
 		return password;
 	}
@@ -61,6 +64,14 @@ public class UserLogin {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+    public Integer getRewards() {
+        return rewards;
+    }
+
+    public void setRewards(Integer rewards) {
+        this.rewards = rewards;
+    }
 
 	public Set<Role> getRoles() {
 		return roles;

@@ -1,10 +1,11 @@
-import { Box, Accordion, AccordionDetails, AccordionSummary, Typography, Button, Slide, Paper} from "@mui/material";
+import { Box, Accordion, AccordionDetails, AccordionSummary, Typography, Button, Slide, Paper, FormControl, FormLabel, TextField, RadioGroup, FormControlLabel, Radio} from "@mui/material";
 import { useRef, useState } from "react";
 
 
 const ActivityList = ( { activity } ) => {
     
     const [checked, setChecked] = useState(false);
+    const [value, setValue] = useState("body");
     const containerRef = useRef();
 
     const activityElements = () => {
@@ -39,17 +40,41 @@ const ActivityList = ( { activity } ) => {
 
     return (
         <>
-            <Box display="flex" flexDirection="column" justifyContent="center" ref={containerRef.current}>
-                <Typography variant="h3" mb={3}>Activities</Typography>
-                {activityElements()}
-                <Slide direction="left" in={checked} container={containerRef.current}>
+            <Box display="flex" flexDirection="column" ref={containerRef.current} alignContent={"center"}>
+                <Slide direction="left" in={!checked} container={containerRef.current}>
+                    <Box>
+                        <Typography variant="h3" mb={3}>Activities</Typography>
+                        {activityElements()}
+                    </Box>
+                </Slide>
+                <Slide direction="left" in={checked} container={containerRef.current} mr={7}>
                     <Box position="absolute">
-                        <Paper>
+                        <Paper sx={{
+                            padding:"10px"
+                        }}>
                             <Typography variant="h3">Activity</Typography>
+                            <FormControl>
+                                <FormLabel>Activity Name</FormLabel>
+                                <TextField placeholder="Name"/>
+                                <FormLabel>Activity Type</FormLabel>
+                                <RadioGroup value={value} onChange={(e) => {setValue(e.target.value)}}>
+                                    <FormControlLabel value="body" control={<Radio />} label="Body" />
+                                    <FormControlLabel value="mind" control={<Radio />} label="Mind" />
+                                    <FormControlLabel value="spirit" control={<Radio />} label="Spirit" />
+                                </RadioGroup>
+                                <FormLabel>Goal Duration</FormLabel>
+                                <TextField placeholder="Goal" type="number" />
+                            </FormControl>
+                            
                         </Paper>
                     </Box>
                 </Slide>
-                <Button variant="contained" onClick={() => {setChecked((prev) => !prev)}}>Add</Button>
+                <Button variant="contained"
+                    onClick={() => {setChecked((prev) => !prev)}}
+                    sx = {{ 
+                        marginTop:"100%",
+                    }}
+                >Add</Button>
                 
             </Box>
             
