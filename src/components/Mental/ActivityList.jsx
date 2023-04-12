@@ -49,7 +49,7 @@ const ActivityList = ( { activity } ) => {
                 </Slide>
                 <Slide direction="left" in={checked} container={containerRef.current} mr={7}>
                     <Box position="absolute">
-                        <Paper sx={{
+                        <Paper elevation={6} sx={{
                             padding:"10px"
                         }}>
                             <Typography variant="h3">Activity</Typography>
