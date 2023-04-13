@@ -22,6 +22,6 @@ public class MentalController {
         this.activityService = activityService;
     }
     
-    @PostMapping("/")
+    @PostMapping("/activity/{id}")
     public ResponseEntity<Activity> createActivity(@PathVariable Long id, @RequestBody Activity body) {return activityService.createActivity(id, body);}
 }

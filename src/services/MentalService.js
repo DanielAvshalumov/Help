@@ -5,7 +5,7 @@ const base = "http://localhost:8080/api/mental/";
 class MentalService {
 
     createActivity(id, body) {
-        return axios.post(base+`${id}`, body, {headers:{'Content-Type':'application/json'}});
+        return axios.post(base+"activity/"+`${id}`, body, {headers:{'Content-Type':'application/json'}});
     }
 
 }

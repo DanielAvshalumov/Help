@@ -20,7 +20,7 @@ const Mental = () => {
         const id = JSON.parse(localStorage.getItem("user")).id;
         const body = {};
         const res = await MentalService.createActivity(id, body);
-        setActivity();
+        console.log(res);
     }
     
     return (
