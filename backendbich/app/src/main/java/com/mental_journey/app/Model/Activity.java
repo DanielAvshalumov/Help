@@ -9,7 +9,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import lombok.Data;
+
 @Entity
+@Data
 public class Activity {
     
     @Id
@@ -68,5 +71,9 @@ public class Activity {
 
     public void setGoal(Integer goal) {
         this.goal = goal;
+    }
+
+    public void setUser(UserLogin user) {
+        this.user = user;
     }
 }
