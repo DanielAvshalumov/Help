@@ -24,12 +24,13 @@ public class Activity {
     private UserLogin user;
 
     @Column( name = "activity_name" )
-    String name;
+    private String name;
 
     @Column( name = "activity_type" )
-    String type;
+    private String type;
 
-    Integer goal;
+    private Integer goal;
+
 
     public Activity() {
         

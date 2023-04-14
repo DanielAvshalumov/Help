@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import MentalService from "../../services/MentalService";
 
 
-const ActivityList = ( { activity } ) => {
+const ActivityList = ( { activity, loading } ) => {
     
     const [checked, setChecked] = useState(false);
     const [type, setType] = useState("body");
@@ -13,15 +13,18 @@ const ActivityList = ( { activity } ) => {
     const containerRef = useRef();
 
     const activityElements = () => {
-        const el =
-                    <Accordion>
-                        <AccordionSummary>
-                            <Typography>Meditation</Typography>
-                        </AccordionSummary>
-                        <AccordionDetails>
-                            <Button variant="contained">Start</Button>
-                        </AccordionDetails>
-                    </Accordion>
+        console.log(activity);
+        const el = activity.map(item => (
+        <Accordion>
+            <AccordionSummary>
+                <Typography>{item.name}</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+                <Typography>{item.type}</Typography>
+                <Button variant="contained">Start</Button>
+            </AccordionDetails>
+        </Accordion>))
+                    
                 
         return el;
     }
@@ -48,7 +51,7 @@ const ActivityList = ( { activity } ) => {
                     <Box>
                         <Typography variant="h3" mb={3}>Activities</Typography>
                         <Box>
-                            {activityElements()}
+                            { !loading && activityElements()}
                         </Box>
                     </Box>
                 </Slide>

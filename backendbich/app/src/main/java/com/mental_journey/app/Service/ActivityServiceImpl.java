@@ -1,6 +1,8 @@
 package com.mental_journey.app.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +31,13 @@ public class ActivityServiceImpl implements ActivityService{
         body.setUser(user.get());
         activityRepo.save(body);
         return new ResponseEntity<>(body,HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<List<Activity>> getAllActivity(Long id) {
+        UserLogin user = userRepo.findById(id).get();
+        List<Activity> res = activityRepo.findAllByUser(user);
+        return new ResponseEntity<>(res, HttpStatus.OK);
     }
     
 }

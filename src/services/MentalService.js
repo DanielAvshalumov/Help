@@ -8,6 +8,10 @@ class MentalService {
         return axios.post(base+"activity/"+`${id}`, body, {headers:{'Content-Type':'application/json'}});
     }
 
+    getAllActivity(id) {
+        return axios.get(base+"activity/"+`${id}`, {headers:{'Content-Type':'application/json'}});
+    }
+
 }
 
 export default new MentalService();
