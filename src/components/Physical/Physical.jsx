@@ -63,7 +63,6 @@ function reducer(physical, action) {
 const Physical = ( { physicalState } ) => {
 
     
-    
     const [physical, dispatch] = useReducer(reducer, physicalState);
     
     const [firstUse, setFirstUse] = useState(true);

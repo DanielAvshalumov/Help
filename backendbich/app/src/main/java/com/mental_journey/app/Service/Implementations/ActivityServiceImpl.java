@@ -1,8 +1,7 @@
-package com.mental_journey.app.Service;
+package com.mental_journey.app.Service.Implementations;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +11,7 @@ import com.mental_journey.app.Model.Activity;
 import com.mental_journey.app.Model.UserLogin;
 import com.mental_journey.app.Repository.ActivityRepository;
 import com.mental_journey.app.Repository.UserLoginRepository;
+import com.mental_journey.app.Service.ActivityService;
 
 @Service
 public class ActivityServiceImpl implements ActivityService{

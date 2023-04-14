@@ -17,7 +17,7 @@ class PhysicalService {
     }
 
     getMeals(id) {
-        return axios.get(base+`meals/${id}`, {headers:{'Content-Type':'application/json'}});
+        return axios.get(base+`${id}/meals`, {headers:{'Content-Type':'application/json'}});
     }
 
     removeMeal(id) {

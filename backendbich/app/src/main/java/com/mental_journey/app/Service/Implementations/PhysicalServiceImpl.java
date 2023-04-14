@@ -1,4 +1,4 @@
-package com.mental_journey.app.Service;
+package com.mental_journey.app.Service.Implementations;
 
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -13,6 +13,7 @@ import com.mental_journey.app.Model.Physical;
 import com.mental_journey.app.Model.UserLogin;
 import com.mental_journey.app.Repository.PhysicalRepository;
 import com.mental_journey.app.Repository.UserLoginRepository;
+import com.mental_journey.app.Service.PhysicalService;
 
 @Service
 public class PhysicalServiceImpl implements PhysicalService{

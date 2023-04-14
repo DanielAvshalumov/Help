@@ -1,4 +1,4 @@
-package com.mental_journey.app.Service;
+package com.mental_journey.app.Service.Implementations;
 
 import java.util.Date;
 import java.util.List;
@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.mental_journey.app.Model.Emotion;
 import com.mental_journey.app.Repository.EmotionRepository;
 import com.mental_journey.app.Repository.UserLoginRepository;
+import com.mental_journey.app.Service.EmotionService;
 
 @Service
 public class EmotionServiceImpl implements EmotionService {

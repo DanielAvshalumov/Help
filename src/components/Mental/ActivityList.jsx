@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import MentalService from "../../services/MentalService";
 
 
-const ActivityList = ( { activity, loading } ) => {
+const ActivityList = ( { activity, loading, setActivity } ) => {
     
     const [checked, setChecked] = useState(false);
     const [type, setType] = useState("body");
@@ -29,10 +29,6 @@ const ActivityList = ( { activity, loading } ) => {
         return el;
     }
 
-    useEffect(() => {
-        console.log(name,type,goal);
-    },[name,type,goal]);
-
     const handleSubmit = async () => {
         const id = JSON.parse(localStorage.getItem("user")).id;
         const body = {
@@ -41,6 +37,18 @@ const ActivityList = ( { activity, loading } ) => {
             goal : goal,
         }
         const res = await MentalService.createActivity(id,body);
+        setActivity((prev) => (
+            [...prev,
+            {
+                name: name,
+                type: type,
+                goal: goal,
+                duration: 0,
+                checked: false,
+                ongoing: false,
+                notes:["",],
+            }]
+        ))
         console.log(res);
     };
 
@@ -81,7 +89,8 @@ const ActivityList = ( { activity, loading } ) => {
                 <Button variant="contained"
                     onClick={() => {setChecked((prev) => !prev)}}
                     sx = {{ 
-                        marginTop:"100%",
+                        position:"relative",
+                        marginTop:"60%",
                     }}
                 >Add</Button>
                 

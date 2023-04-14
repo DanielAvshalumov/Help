@@ -1,4 +1,4 @@
-import { Box, Button, Grid, Typography } from "@mui/material";
+import { Box, Button, Grid, Typography, Checkbox } from "@mui/material";
 import react, { useEffect, useState } from "react";
 import ClockGraph from "./ClockGraph";
 import ActivityList from "./ActivityList";
@@ -9,8 +9,8 @@ const Mental = () => {
     const [activity, setActivity] = useState({
         name: "",
         type: "",
-        duration: 0,
         goal: 0,
+        duration: 0,
         checked: false,
         ongoing: false,
         notes:["",],
@@ -29,11 +29,23 @@ const Mental = () => {
         }))));
         setLoading(false);
     }
-    
+
     useEffect(() =>  {
         getInitialActivities();
         console.log(activity);
     },[])
+
+    const checkListElement = () => {
+        const el = activity.map(item => (
+            <>
+                <Box display="flex" alignItems="center">
+                    <Checkbox disabled/>
+                    <Typography>{item.name+'\t'} - Goal - {item.goal}</Typography>
+                </Box>
+            </>
+        ));
+        return el;
+    }
     
     return (
         <>
@@ -41,12 +53,13 @@ const Mental = () => {
                 <Grid container display="flex" justifyContent="space-around" ml={-1}>
                     <Grid item>
                         <Typography variant="h3">{new Date().toLocaleDateString()}</Typography>
+                        {!loading && checkListElement()}
                     </Grid>
                     <Grid item>
                         <ClockGraph />
                     </Grid>
                     <Grid item>
-                        <ActivityList activity={activity} loading={loading}/>
+                        <ActivityList activity={activity} loading={loading} setActivity={setActivity}/>
                     </Grid>
                 </Grid>
             </Box>

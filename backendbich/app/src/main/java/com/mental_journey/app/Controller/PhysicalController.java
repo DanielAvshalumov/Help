@@ -47,7 +47,7 @@ public class PhysicalController {
         return mealService.create(id,req);
     }
 
-    @GetMapping("/meals/{id}")
+    @GetMapping("{id}/meals")
     public ResponseEntity<List<Meal>> getAllMeals(@PathVariable Long id) throws NotFoundException {
         return mealService.getAll(id);
     }
