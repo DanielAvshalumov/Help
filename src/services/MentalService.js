@@ -12,6 +12,10 @@ class MentalService {
         return axios.get(base+"activity/"+`${id}`, {headers:{'Content-Type':'application/json'}});
     }
 
+    deleteActivity(activityId) {
+        return axios.delete(base+"activity/"+`${activityId}`, {headers:{'Content-Type':'application/json'}});
+    }
+
 }
 
 export default new MentalService();

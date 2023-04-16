@@ -23,6 +23,7 @@ const Mental = () => {
         const res = await MentalService.getAllActivity(id);
         setActivity((prev) => (res.data.map(item => ({
             ...prev,
+            id: item.id,
             name: item.name,
             type: item.type,
             goal: item.goal

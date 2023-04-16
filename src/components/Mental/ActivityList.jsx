@@ -9,19 +9,29 @@ const ActivityList = ( { activity, loading, setActivity } ) => {
     const [type, setType] = useState("body");
     const [name, setName] = useState("");
     const [goal, setGoal] = useState(0);
-
     const containerRef = useRef();
+
+    const deleteActivity = async (e) => {
+        console.log(e.target.value);
+        let activityId = e.target.value;
+        const id = await MentalService.deleteActivity(activityId);
+        setActivity(prev => {
+            const newActivities = prev.filter(item => item.id != activityId);
+            return newActivities;
+        });
+    }
 
     const activityElements = () => {
         console.log(activity);
-        const el = activity.map(item => (
-        <Accordion>
+        const el = activity.map((item, key) => (
+        <Accordion key={key}>
             <AccordionSummary>
                 <Typography>{item.name}</Typography>
             </AccordionSummary>
             <AccordionDetails>
                 <Typography>{item.type}</Typography>
                 <Button variant="contained">Start</Button>
+                <Button variant="contained"  value={item.id} onClick={deleteActivity}>Delete</Button>
             </AccordionDetails>
         </Accordion>))
                     

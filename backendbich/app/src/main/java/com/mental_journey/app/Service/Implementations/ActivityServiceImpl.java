@@ -39,5 +39,11 @@ public class ActivityServiceImpl implements ActivityService{
         List<Activity> res = activityRepo.findAllByUser(user);
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
+
+    @Override
+    public ResponseEntity<Activity> deleteActivity(Long activityId) {
+        activityRepo.deleteById(activityId);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
     
 }

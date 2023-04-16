@@ -11,7 +11,7 @@ const Meals = ({ meals, dispatch }) => {
         //Makes array with index one into single object
         dispatch({type:'eat',payload:{...payload[0]}});
     }
-
+    
     const handleRemove = async (e) => {
         e.preventDefault();
         let id = e.target.value;

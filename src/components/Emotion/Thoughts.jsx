@@ -8,6 +8,11 @@ export default function Thoughts( { data } ) {
     let width = 500;
     let height = 500;
     let nodes = data;
+
+    const thoughtBubble = (x,y) => {
+
+    }
+
     useEffect(() => {
         let simulation = forceSimulation(nodes)
             .force('charge', forceManyBody())
@@ -18,14 +23,17 @@ export default function Thoughts( { data } ) {
                 .selectAll('circle')
                 .data(nodes)
                 .join('circle')
-                .attr('r', (data) => data.rate*2.5)
+                .attr('r', (data) => data.rate*2)
                 .attr('cx', data => data.x/2)
                 .attr('cy', data => data.y/2)
                 .attr('fill', 'yellow')
                 .style('cursor','pointer')
                 .on("click", (data) => {
-                    console.log(data.target.__data__);
-                });
+                    console.log(data);
+                })
+                .append('title')
+                .text(d => `Thought:- ${d.message}`)
+                .style('title',);
         }
     },[data]);
 

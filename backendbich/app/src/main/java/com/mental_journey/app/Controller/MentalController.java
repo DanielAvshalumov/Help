@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,7 +17,7 @@ import com.mental_journey.app.Service.ActivityService;
 
 @CrossOrigin( origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/api/mental")
+@RequestMapping("/api/mental/")
 public class MentalController {
     
     private ActivityService activityService;
@@ -25,9 +26,13 @@ public class MentalController {
         this.activityService = activityService;
     }
     
-    @PostMapping("/activity/{id}")
+    @PostMapping("activity/{id}")
     public ResponseEntity<Activity> createActivity(@PathVariable Long id, @RequestBody Activity body) {return activityService.createActivity(id, body);}
 
-    @GetMapping("/activity/{id}")
+    @GetMapping("activity/{id}")
     public ResponseEntity<List<Activity>> getAllActivities(@PathVariable Long id) {return activityService.getAllActivity(id);}
+
+    @DeleteMapping("activity/{activityId}") 
+    public ResponseEntity<Activity> deleteActivity(@PathVariable Long activityId) {return activityService.deleteActivity(activityId);}
+    
 }

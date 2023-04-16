@@ -11,4 +11,6 @@ public interface ActivityService {
     public ResponseEntity<Activity> createActivity(Long id, Activity body);
 
     public ResponseEntity<List<Activity>> getAllActivity(Long id);
+
+    public ResponseEntity<Activity> deleteActivity(Long activityId);
 }
