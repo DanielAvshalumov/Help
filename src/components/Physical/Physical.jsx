@@ -7,10 +7,21 @@ import Meals from "./Meals";
 
 function reducer(physical, action) {
     switch (action.type) {
-        case("on-load"): 
-           return {
+        case('set-goal'):
+            return {
                 ...physical,
                 goal: 
+                {
+                    calories: action.payload.calories,
+                    protein: action.payload.protein,
+                    carbs: action.payload.carbs,
+                    fat: action.payload.fat
+                }
+            } 
+        case("set-current"): 
+           return {
+                ...physical,
+                current: 
                 {
                     calories: action.payload.calories,
                     protein: action.payload.protein,
@@ -42,10 +53,10 @@ function reducer(physical, action) {
             return {
                 ...physical,
                 current: {
-                    calories: physical.current.calories + action.payload.calories,
-                    protein: physical.current.protein + action.payload.protein,
-                    carbs: physical.current.carbs + action.payload.carbs,
-                    fat: physical.current.fat + action.payload.fat
+                    calories: physical.current.calories - action.payload.calories,
+                    protein: physical.current.protein - action.payload.protein,
+                    carbs: physical.current.carbs - action.payload.carbs,
+                    fat: physical.current.fat - action.payload.fat
                 }
             }
         case('remove-meal'):
@@ -64,11 +75,11 @@ const Physical = ( { physicalState } ) => {
 
     
     const [physical, dispatch] = useReducer(reducer, physicalState);
-    
+
     const [firstUse, setFirstUse] = useState(true);
     const calorieRef = useRef();
 
-    const handleSubmit = async (e) => {
+    const handleNewPhysical = async (e) => {
         const input = [...calorieRef.current].filter(item => item.value).map(item => item.value);
         const body = {
             calories : input[0],
@@ -83,11 +94,22 @@ const Physical = ( { physicalState } ) => {
     
     const getInitialPhysical = async () => {
         const id = JSON.parse(localStorage.getItem("user")).id;
+        const response = await PhysicalService.getUserPhysical(id)
+                .then((res) => {
+                    console.log(res.data);
+                    dispatch({type:'set-goal',payload:res.data});
+                }).catch((error) => {
+                    console.log(error);
+                });
+    }
+
+    const getPhysical = async () => {
+        const id = JSON.parse(localStorage.getItem("user")).id;
         const response = await PhysicalService.getPhysical(id)
                 .then((res) => {
                     if(res.data) {
                         setFirstUse(false);
-                        dispatch({type:"on-load",payload:res.data});
+                        dispatch({type:"set-current",payload:res.data});
                     }
                 }).catch((error) => {
                     console.log("didn't work",error);
@@ -106,8 +128,9 @@ const Physical = ( { physicalState } ) => {
     }
 
     useEffect(() => {
-        getInitialPhysical();
+        getPhysical();
         getInitialMeals();
+        getInitialPhysical();
     },[]);
 
     useEffect(() => {
@@ -130,14 +153,14 @@ const Physical = ( { physicalState } ) => {
     return (
         <React.Fragment>
 
-            { firstUse ? <Fade in={firstUse} timeout={4000}><form onSubmit={handleSubmit} ref={calorieRef}>{PhysicalConfigPage}</form></Fade> :
+            { firstUse ? <Fade in={firstUse} timeout={4000}><form onSubmit={handleNewPhysical} ref={calorieRef}>{PhysicalConfigPage}</form></Fade> :
             
             <Grid container>
                 <Grid item md={5}>
                     <Typography variant="h3" textAlign="center">Macros</Typography>
                     <Box display={"flex"} mt={3} mb={5}>
                         <Box display="flex" flexDirection={"column"} ml={12}>
-                            <Typography variant="h4">Current</Typography>
+                            <Typography variant="h4">Nutrients</Typography>
                             <Typography variant="h5" mt={4}>Calories</Typography>
                             <Typography variant="h5" mt={4}>Protein</Typography>
                             <Typography variant="h5" mt={4}>Carbs</Typography>

@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -42,6 +44,18 @@ public class PhysicalController {
         return physicalService.get(id);
     }
 
+    @GetMapping("{id}/user")
+    @ResponseBody
+    public ResponseEntity<Physical> getUserPhysical(@PathVariable Long id) throws NotFoundException {
+        return physicalService.getUserPhysical(id);
+    }
+ 
+    @PutMapping("{id}")
+    @ResponseBody
+    public ResponseEntity<Physical> updatePhysical(@PathVariable Long id, @RequestParam Long mealId) {
+        return physicalService.update(id, mealId);
+    }
+
     @PostMapping("/meal/{id}")
     public ResponseEntity<Meal> createMeal(@PathVariable Long id, @RequestBody Meal req) throws NotFoundException {
         return mealService.create(id,req);
@@ -57,4 +71,5 @@ public class PhysicalController {
         return mealService.remove(id);
     }
 
+    
 }

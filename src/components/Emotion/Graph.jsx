@@ -21,6 +21,7 @@ function ZoomableLineChart({ data, id = "myZoomableLineChart" }) {
   const dimensions = useResizeObserver(wrapperRef);
   const [currentZoomState, setCurrentZoomState] = useState();
 
+
   // will be called initially and on every data change
   useEffect(() => {
     const svg = select(svgRef.current);

@@ -12,6 +12,14 @@ class PhysicalService {
         return axios.get(base+`${id}`, {headers:{'Content-Type':'application/json'}});
     }
 
+    getUserPhysical(id) {
+        return axios.get(base+`${id}`+"/user", {headers:{'Content-Type':'application/json'}});
+    }
+
+    updatePhysical(id,mealId) {
+        return axios.put(base+`${id}?mealId=${mealId}`, {headers:{'Content-Type':'application/json'}});
+    }
+
     saveMeal(id,body) {
         return axios.post(base+`meal/${id}`, body, {headers:{'Content-Type':'application/json'}});
     }

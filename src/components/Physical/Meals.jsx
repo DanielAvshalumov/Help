@@ -5,9 +5,14 @@ import PhysicalService from "../../services/PhysicalService";
 
 const Meals = ({ meals, dispatch }) => {
 
-    const updateCaloriesFromMeal = (e) => {
+    const updateCaloriesFromMeal = async (e) => {
+        const id = JSON.parse(localStorage.getItem('user')).id;
         let target = e.target.getAttribute('value');
-        let payload = meals.filter((element) => element.mealName === target);
+        let payload = meals.filter((element) => element.id === parseInt(target));
+        const meal = {...payload[0]};
+        console.log(parseInt(target),target);
+        const res = await PhysicalService.updatePhysical(id,parseInt(target));
+        console.log(res);
         //Makes array with index one into single object
         dispatch({type:'eat',payload:{...payload[0]}});
     }
@@ -19,11 +24,12 @@ const Meals = ({ meals, dispatch }) => {
         dispatch({type:'remove-meal',payload:id});
         console.log(res);
     }
+
     
     const mealsElement = meals.map((item,key) => (
         <Box key={key} display={"flex"} sx={{ alignItems:'center', }}>
-            <Paper value={item.mealName} elevation={6} onClick={updateCaloriesFromMeal} sx={{"&:hover":{cursor:"pointer"}, margin:'auto', padding:2 ,mb:3, backgroundColor:'transparent',}}>
-                <Typography value={item.mealName} color={"lightgoldenrodyellow"} variant="h5" noWrap>
+            <Paper value={item.id} elevation={6} onClick={updateCaloriesFromMeal} sx={{"&:hover":{cursor:"pointer"}, margin:'auto', padding:2 ,mb:3, backgroundColor:'transparent',}}>
+                <Typography color={"lightgoldenrodyellow"} variant="h5" noWrap>
                     {item.mealName+" - Calories: "+item.calories+", Protein: "+item.protein+", Carbs: "+item.carbs+", Fat: "+item.fat}
                 </Typography>
             </Paper>

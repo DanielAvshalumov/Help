@@ -27,4 +27,5 @@ public class Physical {
     @OneToOne(cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
     private UserLogin user;
+
 }

@@ -33,7 +33,7 @@ export default function Thoughts( { data } ) {
                 })
                 .append('title')
                 .text(d => `Thought:- ${d.message}`)
-                .style('title',);
+                ;
         }
     },[data]);
 

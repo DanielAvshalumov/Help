@@ -14,16 +14,25 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
             @UniqueConstraint(columnNames="password")
         })
 public class UserLogin {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    private String username;
-
-    private Integer rewards;
-
     @JsonIgnore
     private String password;
+    
+    private String username;
+    
+    private Integer rewards;
+
+    private Integer calories;
+
+    private Integer protein;
+
+    private Integer carbs;
+
+    private Integer fats;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable( name = "user_roles",
@@ -80,4 +89,36 @@ public class UserLogin {
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
+
+    public Integer getCalories() {
+        return calories;
+    }
+
+    public void setCalories(Integer calories) {
+        this.calories = calories;
+    }
+
+    public Integer getProtein() {
+        return protein;
+    }
+
+    public void setProtein(Integer protein) {
+        this.protein = protein;
+    }
+
+    public Integer getCarbs() {
+        return carbs;
+    }
+
+    public void setCarbs(Integer carbs) {
+        this.carbs = carbs;
+    }
+
+    public Integer getFat() {
+        return fats;
+    }
+
+    public void setFat(Integer fats) {
+        this.fats = fats;
+    }
 }
