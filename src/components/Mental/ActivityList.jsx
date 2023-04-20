@@ -50,6 +50,7 @@ const ActivityList = ( { activity, loading, setActivity } ) => {
         setActivity((prev) => (
             [...prev,
             {
+                id: res.data.id,
                 name: name,
                 type: type,
                 goal: goal,

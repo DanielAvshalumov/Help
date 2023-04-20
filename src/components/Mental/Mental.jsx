@@ -37,9 +37,9 @@ const Mental = () => {
     },[])
 
     const checkListElement = () => {
-        const el = activity.map(item => (
+        const el = activity.map((item,key) => (
             <>
-                <Box display="flex" alignItems="center">
+                <Box key={key} display="flex" alignItems="center">
                     <Checkbox disabled/>
                     <Typography>{item.name+'\t'} - Goal - {item.goal}</Typography>
                 </Box>

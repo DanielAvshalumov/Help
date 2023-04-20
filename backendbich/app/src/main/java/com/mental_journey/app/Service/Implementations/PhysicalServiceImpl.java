@@ -2,11 +2,13 @@ package com.mental_journey.app.Service.Implementations;
 
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.mental_journey.app.Model.Meal;
 import com.mental_journey.app.Model.Physical;
@@ -110,7 +112,26 @@ public class PhysicalServiceImpl implements PhysicalService{
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
         }
-        
-
     }
+
+    @Override
+    @Transactional
+    public void resetPhysical() {
+        userRepo.findAll().stream().map(user -> {
+            Physical body = new Physical();
+            body.setId(user.getId());
+            body.setCalories(user.getCalories());
+            body.setProtein(user.getProtein());
+            body.setCarbs(user.getCarbs());
+            body.setFat(user.getFat());
+            
+            System.out.println("Id "+user.getId());
+            System.out.println("Calories " + user.getCalories());
+            System.out.println(user.getProtein());
+            System.out.println(user.getCarbs());
+            System.out.println(user.getFat());
+            return physicalRepo.save(body);
+        }).collect(Collectors.toList());
+    } 
+    
 }
