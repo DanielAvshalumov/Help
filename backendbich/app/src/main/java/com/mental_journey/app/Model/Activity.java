@@ -1,5 +1,7 @@
 package com.mental_journey.app.Model;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -8,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import lombok.Data;
 
@@ -31,6 +34,8 @@ public class Activity {
 
     private Integer goal;
 
+    @OneToMany(mappedBy = "activity")
+    private Set<Journey> history;
 
     public Activity() {
         

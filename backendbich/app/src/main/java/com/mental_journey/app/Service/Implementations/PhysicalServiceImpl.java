@@ -70,6 +70,7 @@ public class PhysicalServiceImpl implements PhysicalService{
         }
     }
 
+    // Retrieves the Caloric goals set by the user
     @Override
     public ResponseEntity<Physical> getUserPhysical(Long id) throws NotFoundException {
         Physical discretePhysical = new Physical();
