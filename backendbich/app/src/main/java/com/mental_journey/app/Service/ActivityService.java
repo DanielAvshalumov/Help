@@ -5,12 +5,15 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 
 import com.mental_journey.app.Model.Activity;
+import com.mental_journey.app.Model.Journey;
 
 public interface ActivityService {
     
-    public ResponseEntity<Activity> createActivity(Long id, Activity body);
+    ResponseEntity<Activity> createActivity(Long id, Activity body);
 
-    public ResponseEntity<List<Activity>> getAllActivity(Long id);
+    ResponseEntity<List<Activity>> getAllActivity(Long id);
 
-    public ResponseEntity<Activity> deleteActivity(Long activityId);
+    ResponseEntity<Activity> deleteActivity(Long activityId);
+
+    ResponseEntity<List<Journey>> getActivityHistory(Long activityId);
 }

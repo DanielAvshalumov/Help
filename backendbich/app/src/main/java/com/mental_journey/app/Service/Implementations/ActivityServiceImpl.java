@@ -8,8 +8,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.mental_journey.app.Model.Activity;
+import com.mental_journey.app.Model.Journey;
 import com.mental_journey.app.Model.UserLogin;
 import com.mental_journey.app.Repository.ActivityRepository;
+import com.mental_journey.app.Repository.JourneyRepository;
 import com.mental_journey.app.Repository.UserLoginRepository;
 import com.mental_journey.app.Service.ActivityService;
 
@@ -20,9 +22,12 @@ public class ActivityServiceImpl implements ActivityService{
 
     private UserLoginRepository userRepo;
 
-    public ActivityServiceImpl(ActivityRepository activityRepo, UserLoginRepository userRepo) {
+    private JourneyRepository journeyRepo;
+
+    public ActivityServiceImpl(ActivityRepository activityRepo, UserLoginRepository userRepo, JourneyRepository journeyRepo) {
         this.activityRepo = activityRepo;
         this.userRepo = userRepo;
+        this.journeyRepo = journeyRepo;
     }
 
     @Override
@@ -46,4 +51,11 @@ public class ActivityServiceImpl implements ActivityService{
         return new ResponseEntity<>(HttpStatus.OK);
     }
     
+    @Override
+    public ResponseEntity<List<Journey>> getActivityHistory(Long activityId) {
+
+
+
+        return new ResponseEntity<>(null, HttpStatus.OK);
+    }
 }
