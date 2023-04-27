@@ -1,4 +1,4 @@
-import { Box, Accordion, AccordionDetails, AccordionSummary, Typography, Button, Slide, Paper, FormControl, FormLabel, TextField, RadioGroup, FormControlLabel, Radio} from "@mui/material";
+import { Box, Accordion, AccordionDetails, AccordionSummary, Typography, Button, Slide, Paper, FormControl, FormLabel, TextField, RadioGroup, FormControlLabel, Radio, CircularProgress} from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 import MentalService from "../../services/MentalService";
 
@@ -70,7 +70,8 @@ const ActivityList = ( { activity, loading, setActivity } ) => {
                     <Box>
                         <Typography variant="h3" mb={3}>Activities</Typography>
                         <Box>
-                            { !loading && activityElements()}
+                            {/* { !loading && activityElements()} */}
+                            { loading ? <CircularProgress /> : activityElements()}
                         </Box>
                     </Box>
                 </Slide>

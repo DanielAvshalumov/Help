@@ -1,6 +1,6 @@
 import { Typography } from "@mui/material";
 import { useRef, useEffect } from "react";
-import { forceCenter, forceManyBody, forceSimulation, select } from 'd3';
+import { forceCenter, forceManyBody, forceSimulation, select, selectAll } from 'd3';
 
 
 export default function Thoughts( { data } ) {
@@ -13,11 +13,13 @@ export default function Thoughts( { data } ) {
 
     }
 
-    useEffect(() => {
+    useEffect(() => {        
+
         let simulation = forceSimulation(nodes)
             .force('charge', forceManyBody())
             .force('center', forceCenter(width / 1.3, height / 1.3))
-            .on('tick', ticked);
+            .on('tick', ticked)
+            
         function ticked() {
             let u = select(graphRef.current)
                 .selectAll('circle')
@@ -30,11 +32,9 @@ export default function Thoughts( { data } ) {
                 .style('cursor','pointer')
                 .on("click", (data) => {
                     console.log(data);
-                })
-                .append('title')
-                .text(d => `Thought:- ${d.message}`)
-                ;
+                });
         }
+
     },[data]);
 
     return (

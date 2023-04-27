@@ -1,4 +1,4 @@
-import { Box, Button, Grid, Typography, Checkbox } from "@mui/material";
+import { Box, Button, Grid, Typography, Checkbox, CircularProgress } from "@mui/material";
 import react, { useEffect, useState } from "react";
 import ClockGraph from "./ClockGraph";
 import ActivityList from "./ActivityList";
@@ -54,7 +54,8 @@ const Mental = () => {
                 <Grid container display="flex" justifyContent="space-around" ml={-1}>
                     <Grid item>
                         <Typography variant="h3">{new Date().toLocaleDateString()}</Typography>
-                        {!loading && checkListElement()}
+                        { loading ? <CircularProgress /> : checkListElement()}
+
                     </Grid>
                     <Grid item>
                         <ClockGraph />
