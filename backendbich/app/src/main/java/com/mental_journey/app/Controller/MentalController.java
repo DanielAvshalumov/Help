@@ -2,6 +2,7 @@ package com.mental_journey.app.Controller;
 
 import java.util.List;
 
+import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -37,6 +38,8 @@ public class MentalController {
     public ResponseEntity<Activity> deleteActivity(@PathVariable Long activityId) {return activityService.deleteActivity(activityId);}
 
     @PostMapping("journey/{activityId}")
-    public ResponseEntity<List<Journey>> getActivityHistory(@PathVariable Long activityId) {return activityService.getActivityHistory(activityId);}
+    public ResponseEntity<Journey> createJourney(@PathVariable Long activityId, int reach) throws NotFoundException {
+        return activityService.createJourney(activityId, reach);
+    }
     
 }

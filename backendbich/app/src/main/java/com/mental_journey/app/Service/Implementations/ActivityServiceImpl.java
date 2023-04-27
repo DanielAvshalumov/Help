@@ -3,6 +3,7 @@ package com.mental_journey.app.Service.Implementations;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -52,10 +53,12 @@ public class ActivityServiceImpl implements ActivityService{
     }
     
     @Override
-    public ResponseEntity<List<Journey>> getActivityHistory(Long activityId) {
+    public ResponseEntity<Journey> createJourney(Long activityId, int reach) throws NotFoundException {
 
+        Activity activity = activityRepo.findById(activityId).orElseThrow(() -> new NotFoundException());
+        Journey entry = new Journey(reach,activity);
+        journeyRepo.save(entry);
 
-
-        return new ResponseEntity<>(null, HttpStatus.OK);
+        return new ResponseEntity<>(entry, HttpStatus.OK);
     }
 }

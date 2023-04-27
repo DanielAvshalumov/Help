@@ -33,10 +33,33 @@ public class Journey {
 
     }
 
-    public Journey(Long id, int reach, Date date, Activity activity) {
-        this.id = id;
+    public Journey(int reach, Activity activity) {
         this.reach = reach;
         this.date = new Date();
+        this.activity = activity;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public Activity getActivity() {
+        return activity;
+    }
+
+    public void setActivity(Activity activity) {
         this.activity = activity;
     }
 }
