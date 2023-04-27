@@ -18,14 +18,13 @@
 }
 
 body {
-    animation: background-loop 10s linear infinite;
+    animation: background-loop 30s linear infinite;
     background: linear-gradient(
         to right,
         var(--s1),
         var(--s2),
         var(--s1)
     );    
-    background-size: 200%;
     margin: 0px;
     overflow: hidden;
 }

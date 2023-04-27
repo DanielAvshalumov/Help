@@ -47,6 +47,14 @@ public class Journey {
         this.id = id;
     }
 
+    public int getReach() {
+        return reach;
+    }
+
+    public void setReach(int reach) {
+        this.reach = reach;
+    }
+
     public Date getDate() {
         return date;
     }

@@ -16,6 +16,7 @@ const Mental = () => {
         notes:["",],
     });
     const [loading, setLoading] = useState(true);
+    const [duration, setDuration] = useState(0);
 
     const getInitialActivities = async () => {
         setLoading(true);
@@ -31,12 +32,20 @@ const Mental = () => {
         setLoading(false);
     }
 
+    const activateActivity = (e) => {
+        let buttonText = e.target.innerText;
+        console.log(buttonText === "START");
+        e.target.innerText = e.target.innerText === "START" ? "STOP" : "START";
+
+    }
+
     useEffect(() =>  {
         getInitialActivities();
         console.log(activity);
     },[])
 
-    const checkListElement = () => {
+    
+    const checklistElement = () => {
         const el = activity.map((item,key) => (
             <>
                 <Box key={key} display="flex" alignItems="center">
@@ -54,14 +63,14 @@ const Mental = () => {
                 <Grid container display="flex" justifyContent="space-around" ml={-1}>
                     <Grid item>
                         <Typography variant="h3">{new Date().toLocaleDateString()}</Typography>
-                        { loading ? <CircularProgress /> : checkListElement()}
+                        { loading ? <CircularProgress /> : checklistElement()}
 
                     </Grid>
                     <Grid item>
-                        <ClockGraph />
+                        <ClockGraph outterarc={0}/>
                     </Grid>
                     <Grid item>
-                        <ActivityList activity={activity} loading={loading} setActivity={setActivity}/>
+                        <ActivityList activity={activity} loading={loading} setActivity={setActivity} activateActivity={activateActivity}/>
                     </Grid>
                 </Grid>
             </Box>

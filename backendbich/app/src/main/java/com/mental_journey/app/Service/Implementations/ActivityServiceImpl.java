@@ -1,5 +1,6 @@
 package com.mental_journey.app.Service.Implementations;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -53,11 +54,13 @@ public class ActivityServiceImpl implements ActivityService{
     }
     
     @Override
-    public ResponseEntity<Journey> createJourney(Long activityId, int reach) throws NotFoundException {
+    public ResponseEntity<Journey> createJourney(Long activityId, Journey reach) throws NotFoundException {
 
-        Activity activity = activityRepo.findById(activityId).orElseThrow(() -> new NotFoundException());
-        Journey entry = new Journey(reach,activity);
-        journeyRepo.save(entry);
+        Journey entry = activityRepo.findById(activityId).map(activity -> {
+            reach.setActivity(activity);
+            reach.setDate(new Date());
+            return journeyRepo.save(reach);
+        }).orElseThrow(() -> new NotFoundException());
 
         return new ResponseEntity<>(entry, HttpStatus.OK);
     }

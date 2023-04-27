@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import MentalService from "../../services/MentalService";
 
 
-const ActivityList = ( { activity, loading, setActivity } ) => {
+const ActivityList = ( { activity, loading, setActivity, activateActivity } ) => {
     
     const [checked, setChecked] = useState(false);
     const [type, setType] = useState("body");
@@ -30,7 +30,7 @@ const ActivityList = ( { activity, loading, setActivity } ) => {
             </AccordionSummary>
             <AccordionDetails>
                 <Typography>{item.type}</Typography>
-                <Button variant="contained">Start</Button>
+                <Button variant="contained" onClick={activateActivity}>Start</Button>
                 <Button variant="contained"  value={item.id} onClick={deleteActivity}>Delete</Button>
             </AccordionDetails>
         </Accordion>))
@@ -70,7 +70,6 @@ const ActivityList = ( { activity, loading, setActivity } ) => {
                     <Box>
                         <Typography variant="h3" mb={3}>Activities</Typography>
                         <Box>
-                            {/* { !loading && activityElements()} */}
                             { loading ? <CircularProgress /> : activityElements()}
                         </Box>
                     </Box>
