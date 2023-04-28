@@ -38,7 +38,7 @@ public class MentalController {
     public ResponseEntity<Activity> deleteActivity(@PathVariable Long activityId) {return activityService.deleteActivity(activityId);}
 
     @PostMapping("journey/{activityId}")
-    public ResponseEntity<Journey> createJourney(@PathVariable Long activityId, Journey reach) throws NotFoundException {
+    public ResponseEntity<Journey> createJourney(@PathVariable Long activityId, int reach) throws NotFoundException {
         return activityService.createJourney(activityId, reach);
     }
     

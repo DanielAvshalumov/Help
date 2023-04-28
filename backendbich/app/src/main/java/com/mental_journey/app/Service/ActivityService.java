@@ -16,5 +16,5 @@ public interface ActivityService {
 
     ResponseEntity<Activity> deleteActivity(Long activityId);
 
-    ResponseEntity<Journey> createJourney(Long activityId, Journey reach) throws NotFoundException;
+    ResponseEntity<Journey> createJourney(Long activityId, int reach) throws NotFoundException;
 }
