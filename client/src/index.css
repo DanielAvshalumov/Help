@@ -25,7 +25,7 @@ body {
         var(--s2),
         var(--s1)
     );    
-    background-size: 200%;
+    /* background-size: 200%; */
     margin: 0px;
     overflow: hidden;
 }

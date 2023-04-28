@@ -16,6 +16,25 @@ const Mental = () => {
         notes:["",],
     });
     const [loading, setLoading] = useState(true);
+    const [duration, setDuration] = useState(0);
+    const [flag, setFlag] = useState(false);
+    const [intervalId, setIntervalId] = useState(null);
+    
+    const startActivity = (e) => {
+        console.log(e.target.innerText);
+        e.target.innerText = e.target.innerText === "START" ? "STOP" : "START";
+        if(!flag) {
+            let num = setInterval(() => {setDuration(prev=>(prev+=0.1))},100);
+            setIntervalId(num);
+            setFlag(true);
+            console.log(duration);
+        } else {
+            const body = activity.filter(item => item.id === parseInt(e.target.value));
+            console.log(e.target.value,"body",body);
+            clearInterval(intervalId);
+            setFlag(false);
+        }
+    }
 
     const getInitialActivities = async () => {
         setLoading(true);
@@ -54,14 +73,14 @@ const Mental = () => {
                 <Grid container display="flex" justifyContent="space-around" ml={-1}>
                     <Grid item>
                         <Typography variant="h3">{new Date().toLocaleDateString()}</Typography>
-                        { loading ? <CircularProgress /> : checkListElement()}
+                        { loading ? <CircularProgress disableShrink/> : checkListElement()}
 
                     </Grid>
                     <Grid item>
-                        <ClockGraph />
+                        <ClockGraph duration={duration}/>
                     </Grid>
                     <Grid item>
-                        <ActivityList activity={activity} loading={loading} setActivity={setActivity}/>
+                        <ActivityList activity={activity} loading={loading} setActivity={setActivity} startActivity={startActivity}/>
                     </Grid>
                 </Grid>
             </Box>

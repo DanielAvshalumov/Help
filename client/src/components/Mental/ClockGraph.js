@@ -3,7 +3,7 @@ import { arc, create, easeLinear, range, scaleLinear, select } from "d3"
 import { useEffect, useRef } from "react";
 
 
-export default function ClockGraph() {
+export default function ClockGraph( {duration} ) {
     
     const graphRef = useRef();
     const radians = Math.PI / 180;
@@ -47,7 +47,7 @@ export default function ClockGraph() {
             .innerRadius(200)
             .outerRadius(180)
             .startAngle(0)
-            .endAngle(Math.PI);
+            .endAngle(2*Math.PI*duration*0.01);
 
         const arcSub = arc()
             .innerRadius(100)
@@ -57,10 +57,14 @@ export default function ClockGraph() {
 
         const currentActivity = svgContent
             .append("path")
+            
+            .transition()
+            .ease(easeLinear)
+            .duration(100)
             .attr("d", arcMain)
             .attr("fill","lightblue")
-            
-            .style("opacity","0.4");
+            .style("opacity","0.1")
+            ;
 
         const subAcivity = svgContent
             .append("path")
@@ -69,12 +73,11 @@ export default function ClockGraph() {
             .attr('stroke', "gray")
             .attr("stroke-width", 1)
 
-            
         
         console.log(svgContent);
 
             
-    },[]);
+    },[duration]);
 
 
 
