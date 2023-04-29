@@ -24,17 +24,33 @@ const Mental = () => {
         console.log(e.target.innerText);
         e.target.innerText = e.target.innerText === "START" ? "STOP" : "START";
         if(!flag) {
-            let num = setInterval(() => {setDuration(prev=>(prev+=0.1))},100);
+            let num = setInterval(() => {setDuration(prev=>(++prev))},1000);
             setIntervalId(num);
             setFlag(true);
             console.log(duration);
         } else {
-            const body = activity.filter(item => item.id === parseInt(e.target.value));
+            const id = parseInt(e.target.value);
+            const body = activity.filter(item => item.id === id)[0];
             console.log(e.target.value,"body",body);
             clearInterval(intervalId);
             setFlag(false);
+            setActivity((prev) => {
+                const newActivities = prev.map(item => {
+                    console.log(item.id,id);
+                    if(item.id === id) {
+                        console.log("reached");
+                        return {...item,duraion:duration,checked:duration > item.goal}
+                    }
+                    return item;
+                });
+                return newActivities;
+            });
         }
     }
+
+    useEffect(() => {
+        console.log(activity);
+    },[activity]);
 
     const getInitialActivities = async () => {
         setLoading(true);
@@ -52,7 +68,7 @@ const Mental = () => {
 
     useEffect(() =>  {
         getInitialActivities();
-        console.log(activity);
+        console.log("initial",activity);
     },[])
 
     const checkListElement = () => {

@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import { arc, create, easeLinear, range, scaleLinear, select } from "d3"
+import { arc, create, easeBack, easeCircle, easeLinear, interpolate, range, scaleLinear, select } from "d3"
 import { useEffect, useRef } from "react";
 
 
@@ -47,33 +47,26 @@ export default function ClockGraph( {duration} ) {
             .innerRadius(200)
             .outerRadius(180)
             .startAngle(0)
-            .endAngle(2*Math.PI*duration*0.01);
-
-        const arcSub = arc()
-            .innerRadius(100)
-            .outerRadius(90)
-            .startAngle(Math.PI)
-            .endAngle(Math.PI*2);
-
-        const currentActivity = svgContent
-            .append("path")
+            .endAngle(0);
             
-            .transition()
-            .ease(easeLinear)
-            .duration(100)
-            .attr("d", arcMain)
-            .attr("fill","lightblue")
-            .style("opacity","0.1")
-            ;
-
-        const subAcivity = svgContent
-            .append("path")
-            .attr("d", arcSub)
-            .attr("fill", "pink")
-            .attr('stroke', "gray")
-            .attr("stroke-width", 1)
 
         
+        const currentActivity = svgContent
+            .selectAll('chart1')
+            .attr('fill','red')
+            .transition()
+            .duration(1000)
+            .attrTween('d', (d,i) => {
+                let interpolate = interpolate(0, Math.PI*2*duration);
+                return ( t ) => {
+                    arcMain.endAngle(interpolate(t));
+                    return arcMain;
+                }
+            })
+            ;
+
+        
+
         console.log(svgContent);
 
             

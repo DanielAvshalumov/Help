@@ -22,7 +22,6 @@ const ActivityList = ( { activity, loading, setActivity, startActivity } ) => {
     }
 
     const activityElements = () => {
-        console.log(activity);
         const el = activity.map((item, key) => (
         <Accordion key={key}>
             <AccordionSummary>
