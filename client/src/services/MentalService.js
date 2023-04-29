@@ -16,6 +16,10 @@ class MentalService {
         return axios.delete(base+"activity/"+`${activityId}`, {headers:{'Content-Type':'application/json'}});
     }
 
+    createJourney(activityId, reach) {
+        return axios.post(base+"journey/"+`${activityId}`, reach, {headers:{'Content-Type':'application/json'}});
+    }
+
 }
 
 export default new MentalService();

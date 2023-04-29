@@ -22,29 +22,30 @@ const Mental = () => {
     
     const startActivity = (e) => {
         console.log(e.target.innerText);
+        const id = parseInt(e.target.value);
+        const body = activity.filter(item => item.id === id)[0];
         e.target.innerText = e.target.innerText === "START" ? "STOP" : "START";
         if(!flag) {
+            setDuration(body.duration);
             let num = setInterval(() => {setDuration(prev=>(++prev))},1000);
             setIntervalId(num);
             setFlag(true);
             console.log(duration);
         } else {
-            const id = parseInt(e.target.value);
-            const body = activity.filter(item => item.id === id)[0];
             console.log(e.target.value,"body",body);
             clearInterval(intervalId);
             setFlag(false);
             setActivity((prev) => {
                 const newActivities = prev.map(item => {
-                    console.log(item.id,id);
                     if(item.id === id) {
-                        console.log("reached");
-                        return {...item,duraion:duration,checked:duration > item.goal}
+                        return {...item,duration:duration,checked:duration > item.goal,ongoing:true}
                     }
                     return item;
                 });
                 return newActivities;
             });
+            console.log(id, duration);
+            // MentalService.createJourney(id,duration);
         }
     }
 

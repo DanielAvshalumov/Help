@@ -20,7 +20,7 @@ public class Journey {
     private Long id;
 
     @Column
-    private int reach;
+    private Integer reach;
 
     @Temporal(TemporalType.DATE)
     private Date date;
@@ -30,10 +30,10 @@ public class Journey {
     private Activity activity;
 
     public Journey() {
-
+        this.date = new Date();
     }
 
-    public Journey(int reach, Activity activity) {
+    public Journey(Integer reach, Activity activity) {
         this.reach = reach;
         this.date = new Date();
         this.activity = activity;
@@ -49,6 +49,14 @@ public class Journey {
 
     public Date getDate() {
         return date;
+    }
+
+    public Integer getReach() {
+        return reach;
+    }
+
+    public void setReach(Integer reach) {
+        this.reach = reach;
     }
 
     public void setDate(Date date) {
