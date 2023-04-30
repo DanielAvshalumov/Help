@@ -7,10 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
 
 @Entity
 public class Journey {
@@ -20,20 +20,19 @@ public class Journey {
     private Long id;
 
     @Column
-    private Integer reach;
+    private int reach;
 
     @Temporal(TemporalType.DATE)
     private Date date;
 
     @ManyToOne
-    @JoinColumn(name = "acitivity_id", nullable = false)
-    private Activity activity;
+    Activity activity;
 
     public Journey() {
         this.date = new Date();
     }
 
-    public Journey(Integer reach, Activity activity) {
+    public Journey(int reach, Activity activity) {
         this.reach = reach;
         this.date = new Date();
         this.activity = activity;
@@ -51,11 +50,11 @@ public class Journey {
         return date;
     }
 
-    public Integer getReach() {
+    public int getReach() {
         return reach;
     }
 
-    public void setReach(Integer reach) {
+    public void setReach(int reach) {
         this.reach = reach;
     }
 

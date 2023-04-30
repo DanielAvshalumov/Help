@@ -53,14 +53,17 @@ public class ActivityServiceImpl implements ActivityService{
     }
     
     @Override
-    public ResponseEntity<Journey> createJourney(Long activityId, Integer reach) throws NotFoundException {
+    public ResponseEntity<Journey> createJourney(Long activityId, int reach) throws NotFoundException {
 
         System.out.println("Before activity repo");
         Activity activity = activityRepo.findById(activityId).orElseThrow(() -> new NotFoundException());
         System.out.println("After activity repo");
         System.out.println("Before Journey Object");
-        Journey entry = new Journey(reach,activity);
-        System.out.println("After Journey object");
+        Journey entry = new Journey();
+        System.out.println(reach);
+        entry.setReach(reach); 
+        entry.setActivity(activity);
+        System.out.println("After Journey Object");
         System.out.println("Before Journey repo");
         journeyRepo.save(entry);
         System.out.println("After Journey repo");

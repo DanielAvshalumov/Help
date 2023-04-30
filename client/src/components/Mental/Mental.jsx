@@ -6,6 +6,7 @@ import MentalService from "../../services/MentalService";
 
 const Mental = () => {
 
+    // Should this be changed to use useReducer? 
     const [activity, setActivity] = useState({
         name: "",
         type: "",
@@ -21,7 +22,6 @@ const Mental = () => {
     const [intervalId, setIntervalId] = useState(null);
     
     const startActivity = (e) => {
-        console.log(e.target.innerText);
         const id = parseInt(e.target.value);
         const body = activity.filter(item => item.id === id)[0];
         e.target.innerText = e.target.innerText === "START" ? "STOP" : "START";
@@ -45,7 +45,7 @@ const Mental = () => {
                 return newActivities;
             });
             console.log(id, duration);
-            // MentalService.createJourney(id,duration);
+            MentalService.createJourney(id,duration);
         }
     }
 

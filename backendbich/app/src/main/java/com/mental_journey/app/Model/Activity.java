@@ -1,7 +1,5 @@
 package com.mental_journey.app.Model;
 
-import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,21 +8,25 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
-@Data
 public class Activity {
     
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     private Long id;
 
+    //Bug: Removing the JSONIgnore below will throw an JsonMappingException / InvalidDefinitonException
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id")
+    @JsonIgnore
     private UserLogin user;
+
+    // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
     @Column( name = "activity_name" )
     private String name;
@@ -33,9 +35,6 @@ public class Activity {
     private String type;
 
     private Integer goal;
-
-    @OneToMany(mappedBy = "activity")
-    private Set<Journey> history;
 
     public Activity() {
         
@@ -77,6 +76,10 @@ public class Activity {
 
     public void setGoal(Integer goal) {
         this.goal = goal;
+    }
+
+    public UserLogin getUser() {
+        return user;
     }
 
     public void setUser(UserLogin user) {
