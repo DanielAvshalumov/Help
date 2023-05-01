@@ -2,6 +2,8 @@ package com.mental_journey.app.Service.Implementations;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.http.HttpStatus;
@@ -40,9 +42,20 @@ public class ActivityServiceImpl implements ActivityService{
     }
 
     @Override
-    public ResponseEntity<List<Activity>> getAllActivity(Long id) {
+    public ResponseEntity<Set<Activity>> getAllActivity(Long id) throws Exception {
         UserLogin user = userRepo.findById(id).get();
-        List<Activity> res = activityRepo.findAllByUser(user);
+        
+        Set<Activity> res = activityRepo.findAllByUser(user).stream().map(activity -> {
+            // Set<Journey> entries = journeyRepo.findAllByActivity(activity);
+            System.out.println(activity.getName());
+            Set<Journey> entries = journeyRepo.findAllByActivity(activity);
+            System.out.println(entries.toString());
+            // System.out.println("hey"+entries.toString());
+            // activity.setEntries(entries);
+            // System.out.println("hey"+entries.toString());
+            return activity;
+        }).collect(Collectors.toSet());
+        
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 

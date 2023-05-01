@@ -1,6 +1,7 @@
 package com.mental_journey.app.Controller;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.http.ResponseEntity;
@@ -32,7 +33,7 @@ public class MentalController {
     public ResponseEntity<Activity> createActivity(@PathVariable Long id, @RequestBody Activity body) {return activityService.createActivity(id, body);}
 
     @GetMapping("activity/{id}")
-    public ResponseEntity<List<Activity>> getAllActivities(@PathVariable Long id) {return activityService.getAllActivity(id);}
+    public ResponseEntity<Set<Activity>> getAllActivities(@PathVariable Long id) throws Exception {return activityService.getAllActivity(id);}
 
     @DeleteMapping("activity/{activityId}") 
     public ResponseEntity<Activity> deleteActivity(@PathVariable Long activityId) {return activityService.deleteActivity(activityId);}
