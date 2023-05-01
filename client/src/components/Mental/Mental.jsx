@@ -21,7 +21,7 @@ const Mental = () => {
     const [flag, setFlag] = useState(false);
     const [intervalId, setIntervalId] = useState(null);
     
-    const startActivity = async (e) => {
+    const startActivity = (e) => {
         const id = parseInt(e.target.value);
         const body = activity.filter(item => item.id === id)[0];
         e.target.innerText = e.target.innerText === "START" ? "STOP" : "START";
@@ -45,8 +45,7 @@ const Mental = () => {
                 return newActivities;
             });
             console.log(id, duration);
-            const res = await MentalService.createJourney(id,duration);
-            console.log(res);
+            MentalService.createJourney(id,duration);
         }
     }
 
@@ -66,7 +65,6 @@ const Mental = () => {
             goal: item.goal
         }))));
         setLoading(false);
-        console.log(res);
     }
 
     useEffect(() =>  {

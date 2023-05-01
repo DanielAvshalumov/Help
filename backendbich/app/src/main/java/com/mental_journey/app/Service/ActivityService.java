@@ -1,7 +1,6 @@
 package com.mental_journey.app.Service;
 
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +12,7 @@ public interface ActivityService {
     
     ResponseEntity<Activity> createActivity(Long id, Activity body);
 
-    ResponseEntity<Set<Activity>> getAllActivity(Long id) throws Exception;
+    ResponseEntity<List<Activity>> getAllActivity(Long id);
 
     ResponseEntity<Activity> deleteActivity(Long activityId);
 

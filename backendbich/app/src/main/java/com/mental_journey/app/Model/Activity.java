@@ -1,7 +1,5 @@
 package com.mental_journey.app.Model;
 
-import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,7 +8,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -38,9 +35,6 @@ public class Activity {
     private String type;
 
     private Integer goal;
-
-    // @OneToMany(fetch = FetchType.EAGER, mappedBy = "activity")
-    // private Set<Journey> entries;
 
     public Activity() {
         
@@ -91,12 +85,4 @@ public class Activity {
     public void setUser(UserLogin user) {
         this.user = user;
     }
-
-    // public Set<Journey> getEntries() {
-    //     return entries;
-    // }
-
-    // public void setEntries(Set<Journey> entries) {
-    //     this.entries = entries;
-    // }
 }
