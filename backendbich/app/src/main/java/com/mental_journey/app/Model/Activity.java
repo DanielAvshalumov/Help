@@ -39,8 +39,8 @@ public class Activity {
 
     private Integer goal;
 
-    // @OneToMany(fetch = FetchType.EAGER, mappedBy = "activity")
-    // private Set<Journey> entries;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "activity")
+    private Set<Journey> entries;
 
     public Activity() {
         
@@ -92,11 +92,11 @@ public class Activity {
         this.user = user;
     }
 
-    // public Set<Journey> getEntries() {
-    //     return entries;
-    // }
+    public Set<Journey> getEntries() {
+        return entries;
+    }
 
-    // public void setEntries(Set<Journey> entries) {
-    //     this.entries = entries;
-    // }
+    public void setEntries(Set<Journey> entries) {
+        this.entries = entries;
+    }
 }

@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 public class Journey {
@@ -28,7 +30,7 @@ public class Journey {
     private Date date;
 
     @ManyToOne( fetch = FetchType.LAZY )
-    // @JoinColumn
+    @JsonIgnore
     Activity activity;
 
     public Journey() {
