@@ -1,6 +1,5 @@
 package com.mental_journey.app.Service.Implementations;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -46,13 +45,8 @@ public class ActivityServiceImpl implements ActivityService{
         UserLogin user = userRepo.findById(id).get();
         
         Set<Activity> res = activityRepo.findAllByUser(user).stream().map(activity -> {
-            // Set<Journey> entries = journeyRepo.findAllByActivity(activity);
-            System.out.println(activity.getName());
             Set<Journey> entries = journeyRepo.findAllByActivity(activity);
             System.out.println(entries.toString());
-            // System.out.println("hey"+entries.toString());
-            // activity.setEntries(entries);
-            // System.out.println("hey"+entries.toString());
             return activity;
         }).collect(Collectors.toSet());
         
@@ -83,4 +77,29 @@ public class ActivityServiceImpl implements ActivityService{
 
         return new ResponseEntity<>(entry, HttpStatus.OK);
     }
+
+    @Override
+    public ResponseEntity<Journey> updateJourney(Long activityId, String date) throws NotFoundException {
+        
+        Activity activity = activityRepo.findById(activityId).orElseThrow(() -> new NotFoundException());
+        // Journey res = journeyRepo.findAllByActivity(activity).stream().map(journey -> {
+        //     if(journey.getDate() == date) {
+        //         System.out.println("found"+" "+journey.getId());
+        //         journey.setReach(1);
+        //         return journeyRepo.save(journey);
+        //     }
+        // });
+        Set<Journey> resList = journeyRepo.findAllByActivity(activity);
+        Journey res = null;
+        for(Journey item : resList) {
+            System.out.println(item.getDate().toString()+"<-persistent data --- client data->"+date);
+            if(item.getDate().toString().equals(date)) {
+                res = item;
+                System.out.println("reached equal date");
+            }
+        }
+
+        return new ResponseEntity<Journey>(res, HttpStatus.OK);
+    }
+
 }

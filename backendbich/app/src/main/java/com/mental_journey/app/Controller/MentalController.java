@@ -1,6 +1,5 @@
 package com.mental_journey.app.Controller;
 
-import java.util.List;
 import java.util.Set;
 
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
@@ -10,8 +9,10 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mental_journey.app.Model.Activity;
@@ -39,11 +40,14 @@ public class MentalController {
     public ResponseEntity<Activity> deleteActivity(@PathVariable Long activityId) {return activityService.deleteActivity(activityId);}
 
     @PostMapping("journey/{activityId}")
-    public ResponseEntity<Journey> createJourney(@PathVariable Long activityId,@RequestBody int reach) throws NotFoundException {
-        System.out.println("Controller begin");
-        System.out.println(reach);
-        System.out.println("Controller End");
-        return activityService.createJourney(activityId, reach);
+    public ResponseEntity<Journey> createJourney(
+        @PathVariable Long activityId,
+        @RequestBody int reach) throws NotFoundException {return activityService.createJourney(activityId, reach);
     }
+
+    @PutMapping("journey/{activityId}")
+    public ResponseEntity<Journey> updateJourney(
+        @PathVariable Long activityId,
+        @RequestParam String date) throws NotFoundException {return activityService.updateJourney(activityId, date);}
     
 }

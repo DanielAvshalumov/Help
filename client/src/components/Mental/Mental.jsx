@@ -44,8 +44,9 @@ const Mental = () => {
                 });
                 return newActivities;
             });
-            console.log(id, duration);
-            const res = await MentalService.createJourney(id,duration);
+            console.log(id, duration, body.ongoing);
+            // const res = await MentalService.createJourney(id,duration);
+            const res = body.ongoing ? await MentalService.updateJourney(id) : await MentalService.createJourney(id,duration);
             console.log(res);
         }
     }
@@ -58,13 +59,24 @@ const Mental = () => {
         setLoading(true);
         const id = JSON.parse(localStorage.getItem("user")).id;
         const res = await MentalService.getAllActivity(id);
-        setActivity((prev) => (res.data.map(item => ({
-            ...prev,
-            id: item.id,
-            name: item.name,
-            type: item.type,
-            goal: item.goal
-        }))));
+        setActivity((prev) => (res.data.map(item => {
+            let entries = item.entries;
+            let duration = 0;
+            for(let i = 0; i < entries.length; i++) {
+                duration+=entries[i].reach;
+            }
+            console.log("duration",entries);
+            const body = {
+                ...prev,
+                id: item.id,
+                name: item.name,
+                type: item.type,
+                goal: item.goal,
+                duration: duration ?? 0,
+                ongoing: duration > 0
+            };
+            return body;
+        })));
         setLoading(false);
         console.log(res);
     }
