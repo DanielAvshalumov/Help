@@ -20,10 +20,8 @@ class MentalService {
         return axios.post(base+"journey/"+`${activityId}`, reach, {headers:{'Content-Type':'application/json'}});
     }
 
-    updateJourney(activityId) {
-        let date = (new Date()).toISOString().split('T')[0];
-        console.log(date);
-        return axios.put(base+`journey/${activityId}?date=${date}`, {headers:{'Content-Type':'application/json'}});
+    updateJourney(body, reach) {
+        return axios.put(base+`journey/${body.id}?reach=${reach}`, body, {headers:{'Content-Type':'application/json'}});
     }
 
 }

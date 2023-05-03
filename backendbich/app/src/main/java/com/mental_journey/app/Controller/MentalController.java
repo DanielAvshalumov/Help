@@ -45,9 +45,7 @@ public class MentalController {
         @RequestBody int reach) throws NotFoundException {return activityService.createJourney(activityId, reach);
     }
 
-    @PutMapping("journey/{activityId}")
-    public ResponseEntity<Journey> updateJourney(
-        @PathVariable Long activityId,
-        @RequestParam String date) throws NotFoundException {return activityService.updateJourney(activityId, date);}
+    @PutMapping("journey/{journeyId}")
+    public ResponseEntity<Journey> updateJourney(@RequestBody Journey req,@RequestParam Integer reach) throws NotFoundException {return activityService.updateJourney(req, reach);}
     
 }

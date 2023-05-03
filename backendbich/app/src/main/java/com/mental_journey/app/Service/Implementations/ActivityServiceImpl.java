@@ -79,27 +79,14 @@ public class ActivityServiceImpl implements ActivityService{
     }
 
     @Override
-    public ResponseEntity<Journey> updateJourney(Long activityId, String date) throws NotFoundException {
+    public ResponseEntity<Journey> updateJourney(Journey req, Integer reach) throws NotFoundException {
         
-        Activity activity = activityRepo.findById(activityId).orElseThrow(() -> new NotFoundException());
-        // Journey res = journeyRepo.findAllByActivity(activity).stream().map(journey -> {
-        //     if(journey.getDate() == date) {
-        //         System.out.println("found"+" "+journey.getId());
-        //         journey.setReach(1);
-        //         return journeyRepo.save(journey);
-        //     }
-        // });
-        Set<Journey> resList = journeyRepo.findAllByActivity(activity);
-        Journey res = null;
-        for(Journey item : resList) {
-            System.out.println(item.getDate().toString()+"<-persistent data --- client data->"+date);
-            if(item.getDate().toString().equals(date)) {
-                res = item;
-                System.out.println("reached equal date");
-            }
-        }
 
-        return new ResponseEntity<Journey>(res, HttpStatus.OK);
+        Journey res = journeyRepo.findById(req.getId()).orElseThrow(() -> new NotFoundException());
+        System.out.println(reach);
+        res.setReach(reach);
+
+        return ResponseEntity.ok(journeyRepo.save(res));
     }
 
 }

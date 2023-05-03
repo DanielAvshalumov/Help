@@ -46,7 +46,7 @@ const Mental = () => {
             });
             console.log(id, duration, body.ongoing);
             // const res = await MentalService.createJourney(id,duration);
-            const res = body.ongoing ? await MentalService.updateJourney(id) : await MentalService.createJourney(id,duration);
+            const res = body.ongoing ? await MentalService.updateJourney(body.today, duration) : await MentalService.createJourney(id,duration);
             console.log(res);
         }
     }
@@ -61,11 +61,17 @@ const Mental = () => {
         const res = await MentalService.getAllActivity(id);
         setActivity((prev) => (res.data.map(item => {
             let entries = item.entries;
-            let duration = 0;
+            let date = new Date();
+            const offset = date.getTimezoneOffset();
+            date = new Date(date.getTime() - (offset*60*1000)).toISOString().split('T')[0];
+            let today;
             for(let i = 0; i < entries.length; i++) {
-                duration+=entries[i].reach;
+                if(date === entries[i].date) {
+                    today = entries[i];
+                }
             }
-            console.log("duration",entries);
+            let duration = today?.reach ?? 0;
+
             const body = {
                 ...prev,
                 id: item.id,
@@ -73,12 +79,13 @@ const Mental = () => {
                 type: item.type,
                 goal: item.goal,
                 duration: duration ?? 0,
-                ongoing: duration > 0
+                ongoing: duration > 0,
+                today: today ?? null
             };
             return body;
         })));
         setLoading(false);
-        console.log(res);
+        console.log("inside function",res);
     }
 
     useEffect(() =>  {
