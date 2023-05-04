@@ -17,9 +17,7 @@ function LogIn(props) {
     useEffect(() => {
         props.setIncorrectMessage("");
     },[]);
-    useEffect(() => {
-        console.log(logInForm,staySignedIn);
-    },[logInForm,staySignedIn]);
+    
     return (
         <>  <form onSubmit={props.handleSubmit}>
                 <Box display={"flex"} flexDirection="column" alignItems={"center"}>

@@ -70,7 +70,7 @@ export default function ClockGraph( {duration} ) {
         console.log(svgContent);
 
             
-    },[duration]);
+    },[]);
 
 
 

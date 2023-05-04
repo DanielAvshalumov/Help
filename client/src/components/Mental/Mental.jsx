@@ -11,8 +11,6 @@ const Mental = () => {
         name: "",
         type: "",
         goal: 0,
-        duration: 0,
-        checked: false,
         ongoing: false,
         notes:["",],
     });
@@ -26,27 +24,28 @@ const Mental = () => {
         const body = activity.filter(item => item.id === id)[0];
         e.target.innerText = e.target.innerText === "START" ? "STOP" : "START";
         if(!flag) {
-            setDuration(body.duration);
+            setDuration(body?.today?.reach ?? 0);
             let num = setInterval(() => {setDuration(prev=>(++prev))},1000);
             setIntervalId(num);
             setFlag(true);
-            console.log(duration);
         } else {
             console.log(e.target.value,"body",body);
             clearInterval(intervalId);
             setFlag(false);
+            const res = body.ongoing ? await MentalService.updateJourney(body.today, duration) : await MentalService.createJourney(id,duration);
             setActivity((prev) => {
                 const newActivities = prev.map(item => {
                     if(item.id === id) {
-                        return {...item,duration:duration,checked:duration > item.goal,ongoing:true}
+                        return {...item,
+                            ongoing:true,
+                            today:{...res.data}
+                        }
                     }
                     return item;
                 });
                 return newActivities;
             });
             console.log(id, duration, body.ongoing);
-            // const res = await MentalService.createJourney(id,duration);
-            const res = body.ongoing ? await MentalService.updateJourney(body.today, duration) : await MentalService.createJourney(id,duration);
             console.log(res);
         }
     }
@@ -78,7 +77,6 @@ const Mental = () => {
                 name: item.name,
                 type: item.type,
                 goal: item.goal,
-                duration: duration ?? 0,
                 ongoing: duration > 0,
                 today: today ?? null
             };
