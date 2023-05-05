@@ -113,7 +113,7 @@ const Mental = () => {
 
                     </Grid>
                     <Grid item>
-                        <ClockGraph duration={duration}/>
+                       { !loading ? <ClockGraph activity={activity} /> : <CircularProgress /> }
                     </Grid>
                     <Grid item>
                         <ActivityList activity={activity} loading={loading} setActivity={setActivity} startActivity={startActivity}/>
