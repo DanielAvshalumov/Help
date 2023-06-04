@@ -50,9 +50,6 @@ const Mental = () => {
         }
     }
 
-    useEffect(() => {
-        console.log(activity);
-    },[activity]);
 
     const getInitialActivities = async () => {
         setLoading(true);

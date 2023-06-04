@@ -1,5 +1,7 @@
 package com.mental_journey.app.Service;
 
+import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
@@ -19,4 +21,6 @@ public interface ActivityService {
     ResponseEntity<Journey> createJourney(Long activityId, int reach) throws NotFoundException;
 
     ResponseEntity<Journey> updateJourney(Journey req, Integer reach) throws NotFoundException;
+
+    ResponseEntity<List<Journey>> getJourneyByDate(Long activityId, Date today);
 }

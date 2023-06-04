@@ -15,7 +15,7 @@ public class PhysicalReset {
         this.physicalService = physicalService;
     }
     
-    @Scheduled(cron = "0 0 0 * * ?")
+    @Scheduled(cron = "0 0 19 * * ?")
     public void cronJobSch() {
 
         System.out.println("Right on schedule c:");

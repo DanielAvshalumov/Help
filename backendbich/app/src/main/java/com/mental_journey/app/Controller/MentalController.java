@@ -1,8 +1,11 @@
 package com.mental_journey.app.Controller;
 
+import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -47,5 +50,8 @@ public class MentalController {
 
     @PutMapping("journey/{journeyId}")
     public ResponseEntity<Journey> updateJourney(@RequestBody Journey req,@RequestParam Integer reach) throws NotFoundException {return activityService.updateJourney(req, reach);}
+
+    @GetMapping("journey/{activityId}")
+    public ResponseEntity<List<Journey>> getJourneyByDate(@PathVariable Long activityId, @RequestParam @DateTimeFormat(pattern="yyyy-MM-dd") Date today) throws NotFoundException {return activityService.getJourneyByDate(activityId,today);}
     
 }

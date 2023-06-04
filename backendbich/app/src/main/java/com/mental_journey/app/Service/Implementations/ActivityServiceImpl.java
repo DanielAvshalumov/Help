@@ -1,5 +1,8 @@
 package com.mental_journey.app.Service.Implementations;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -80,6 +83,13 @@ public class ActivityServiceImpl implements ActivityService{
         res.setReach(reach);
 
         return ResponseEntity.ok(journeyRepo.save(res));
+    }
+
+    @Override
+    public ResponseEntity<List<Journey>> getJourneyByDate(Long activityId, Date today) {
+        activityRepo.findById(activityId).get().getEntries().stream().filter(date -> date.getDate().compareTo(today) == 0).forEach(System.out::println);
+        // continue from here
+        return new ResponseEntity<>(null,HttpStatus.OK);
     }
 
 }
